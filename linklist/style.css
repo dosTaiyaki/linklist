@@ -1,22 +1,180 @@
-body {
-  font-family: sans-serif;
-  background: #f5f5f5;
-  text-align: center;
+/* 基本設定 */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* ヘッダー */
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
 h1 {
-  margin-top: 2em;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-ul {
+
+.subtitle {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+/* セクション */
+.link-section {
+  margin-bottom: 2.5rem;
+}
+
+.link-section h2 {
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* リンクリスト */
+.links {
   list-style: none;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-li {
-  margin: 1em 0;
-}
-a {
+
+.link-card {
+  display: block;
+  padding: 1rem 1.5rem;
   text-decoration: none;
-  color: #007acc;
-  font-size: 1.2em;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.link-card:hover::before {
+  left: 100%;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* プラットフォーム別カラー */
+.twitter {
+  background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+}
+
+.instagram {
+  background: linear-gradient(135deg, #E4405F, #C13584);
+}
+
+.youtube {
+  background: linear-gradient(135deg, #FF0000, #CC0000);
+}
+
+.discord {
+  background: linear-gradient(135deg, #7289DA, #5865F2);
+}
+
+.note {
+  background: linear-gradient(135deg, #41C9B4, #2BB8A3);
+}
+
+.misskey {
+  background: linear-gradient(135deg, #86B300, #6B8F00);
+}
+
+.threads {
+  background: linear-gradient(135deg, #000000, #333333);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .link-card {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .link-section h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.link-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.link-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.link-section:nth-child(3) {
+  animation-delay: 0.2s;
 } 
