@@ -11,18 +11,60 @@ body {
   min-height: 100vh;
   color: #333;
   line-height: 1.6;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
 }
 
 .container {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ダークモード切り替えボタン */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(15deg);
 }
 
 /* ヘッダー */
 header {
   text-align: center;
   margin-bottom: 3rem;
+  flex-shrink: 0;
 }
 
 h1 {
@@ -37,6 +79,11 @@ h1 {
   color: rgba(255,255,255,0.9);
   font-size: 1.1rem;
   font-weight: 300;
+}
+
+/* メインコンテンツ */
+.links-container {
+  flex: 1;
 }
 
 /* セクション */
@@ -125,6 +172,21 @@ h1 {
   background: linear-gradient(135deg, #000000, #333333);
 }
 
+/* フッター */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+footer p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
   .container {
@@ -138,6 +200,13 @@ h1 {
   .link-card {
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
+  }
+  
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
   }
 }
 
@@ -177,4 +246,11 @@ h1 {
 
 .link-section:nth-child(3) {
   animation-delay: 0.2s;
+}
+
+/* システムのダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  }
 } 

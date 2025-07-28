@@ -4,9 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taiyakidos - SNS Links</title>
+  
+  <!-- SEO対策 -->
+  <meta name="description" content="TaiyakidosのSNSリンク集です。X、Instagram、YouTube、Discord、note、Misskey、Threadsなど、様々なプラットフォームで活動しています。">
+  <meta name="keywords" content="Taiyakidos, SNS, リンク集, X, Instagram, YouTube, Discord, note, Misskey, Threads">
+  <meta name="author" content="Taiyakidos">
+  
+  <!-- OGP設定 -->
+  <meta property="og:title" content="Taiyakidos - SNS Links">
+  <meta property="og:description" content="TaiyakidosのSNSリンク集です。様々なプラットフォームで活動しています。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dosTaiyaki.github.io/linklist">
+  <meta property="og:image" content="https://dosTaiyaki.github.io/linklist/og-image.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Taiyakidos - SNS Links">
+  <meta name="twitter:description" content="TaiyakidosのSNSリンク集です。様々なプラットフォームで活動しています。">
+  
+  <!-- ファビコン -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- ダークモード切り替えボタン -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="ダークモード切り替え">
+    <span class="theme-icon">🌙</span>
+  </button>
+
   <div class="container">
     <header>
       <h1>Taiyakidos</h1>
@@ -45,6 +81,13 @@
         </ul>
       </section>
     </main>
+    
+    <!-- フッター -->
+    <footer>
+      <p>&copy; 2024 Taiyakidos. All rights reserved.</p>
+    </footer>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html> 
