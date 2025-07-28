@@ -1,58 +1,72 @@
-<!DOCTYPE html>
-<html lang="en"> <head>
+　<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link List Manager</title>
+    <title>My Lit.Link Style Profile</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    </head>
 <body>
-    <div class="container">
-        <h1>My Link List</h1>
-
-        <section class="form-section">
-            <form id="link-form">
-                <div>
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" required placeholder="e.g., Google Search">
-                </div>
-                <div>
-                    <label for="url">URL:</label>
-                    <input type="url" id="url" required placeholder="e.g., https://www.google.com">
-                </div>
-                <div>
-                    <label for="tags">Tags (comma-separated):</label>
-                    <input type="text" id="tags" placeholder="e.g., search, utility, tech">
-                </div>
-                <button type="submit">Add Link</button>
-            </form>
-        </section>
-
-        <section class="filter-sort-section">
-            <input type="text" id="search-input" placeholder="Search links by title, URL or tags...">
-            <button id="clear-search">Clear Search</button>
-            <select id="sort-select">
-                <option value="none">Sort By</option>
-                <option value="title-asc">Title (A-Z)</option>
-                <option value="title-desc">Title (Z-A)</option>
-                </select>
-        </section>
-
-        <section class="utility-buttons">
-            <div>
-                <input type="file" id="import-file-input" accept=".json" style="display: none;">
-                <label for="import-file-input" class="button">Import from File</label>
-                </div>
-            <button id="export-button">Export Links to JSON</button>
+    <div class="background-overlay"></div> <div class="container">
+        <section class="profile-section">
+            <div class="profile-avatar-container">
+                <img src="https://via.placeholder.com/150/007bff/FFFFFF?text=Avatar" alt="Profile Avatar" class="profile-avatar">
+            </div>
+            <h1 class="profile-name">Your Name Here</h1>
+            <p class="profile-bio">
+                ここに簡単な自己紹介やキャッチフレーズが入ります。<br>
+                複数のSNSやウェブサイトへのリンクをまとめましょう！
+            </p>
         </section>
 
         <section class="link-list-section">
-            <h2>Your Links</h2>
             <ul id="link-list">
-                <p>Loading links...</p>
+                <p class="no-links-message">リンクがありません。追加してください。</p>
             </ul>
+        </section>
+
+        <section class="admin-section">
+            <h2>管理機能</h2>
+            <div class="form-section">
+                <h3>リンク追加/編集</h3>
+                <form id="link-form">
+                    <div>
+                        <label for="title">リンク名:</label>
+                        <input type="text" id="title" required placeholder="例: X (旧Twitter), YouTubeチャンネル">
+                    </div>
+                    <div>
+                        <label for="url">URL:</label>
+                        <input type="url" id="url" required placeholder="例: https://twitter.com/yourname">
+                    </div>
+                    <div>
+                        <label for="iconClass">アイコンクラス (任意):</label>
+                        <input type="text" id="iconClass" placeholder="例: fab fa-twitter (Font Awesomeクラス)">
+                        <small>Font Awesomeアイコンを使いたい場合 (例: `fab fa-twitter`, `fab fa-youtube`)。別途Font Awesomeの導入が必要です。</small>
+                    </div>
+                    <button type="submit">リンクを追加/更新</button>
+                </form>
+            </div>
+
+            <div class="filter-sort-section">
+                <h3>リンク検索/ソート</h3>
+                <input type="text" id="search-input" placeholder="リンクを検索...">
+                <button id="clear-search">検索クリア</button>
+                <select id="sort-select">
+                    <option value="none">ソート順</option>
+                    <option value="title-asc">名前順 (A-Z)</option>
+                    <option value="title-desc">名前順 (Z-A)</option>
+                </select>
+            </div>
+
+            <div class="utility-buttons">
+                <h3>データ管理</h3>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                <label for="import-file-input" class="button">JSONからインポート</label>
+                <button id="export-button">JSONへエクスポート</button>
+            </div>
         </section>
     </div>
 
-    <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
