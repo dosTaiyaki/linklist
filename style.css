@@ -1,289 +1,100 @@
-/* General Body Styles */
 body {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* Add more common sans-serif fonts */
-    background-color: #eef4f7; /* より柔らかい水色の背景 */
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5; /* 薄いグレーの背景 */
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start; /* 上部に寄せる */
     min-height: 100vh;
-    box-sizing: border-box;
+    margin: 0;
+    padding: 20px; /* 全体の余白 */
+    box-sizing: border-box; /* パディングを幅に含める */
 }
 
-/* Container for main content */
 .container {
-    background-color: #ffffff;
+    background-color: #ffffff; /* 白い背景 */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    border-radius: 16px; /* さらに角丸を強調 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* 影をより柔らかく、広げる */
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 20px;
-}
-
-/* Headings */
-h1 {
-    color: #36a2eb; /* アイコンの青に近い、少し優しい青 */
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 2.3em; /* 少し大きく */
-    font-weight: 700; /* よりしっかりとした太さ */
-}
-
-/* Form Styles */
-.form-section {
-    margin-bottom: 30px;
-    border-bottom: 1px solid #e0e0e0; /* より薄い区切り線 */
-    padding-bottom: 25px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600; /* ラベルも少し太く */
-    color: #555;
-}
-
-input[type="text"],
-input[type="url"],
-textarea {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc; /* より柔らかいボーダー */
-    border-radius: 10px; /* 入力フィールドの角丸も強調 */
-    font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="url"]:focus,
-textarea:focus {
-    border-color: #36a2eb; /* アイコンの青に合わせる */
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(54, 162, 235, 0.2); /* 優しいフォーカスリング */
-}
-
-/* Buttons */
-button {
-    background-color: #36a2eb; /* アイコンの青に合わせる */
-    color: white;
-    padding: 13px 22px; /* 少し大きめに */
-    border: none;
-    border-radius: 10px; /* ボタンの角丸も強調 */
-    cursor: pointer;
-    font-size: 1.05em; /* 少し大きく */
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    margin-right: 10px;
-    box-shadow: 0 4px 10px rgba(54, 162, 235, 0.2); /* ボタンにも優しい影 */
-}
-
-button:hover {
-    background-color: #2a8ed6; /* 少し濃い青 */
-    transform: translateY(-3px); /* 浮き上がりを少し大きく */
-    box-shadow: 0 6px 15px rgba(54, 162, 235, 0.3);
-}
-
-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(54, 162, 235, 0.2); /* 押した時に影を弱く */
-}
-
-/* Specific button styles for clarity */
-.delete-button {
-    background-color: #ff6384; /* 少しポップな赤 */
-    box-shadow: 0 4px 10px rgba(255, 99, 132, 0.2);
-}
-
-.delete-button:hover {
-    background-color: #eb5474;
-    box-shadow: 0 6px 15px rgba(255, 99, 132, 0.3);
-}
-
-.edit-button {
-    background-color: #ffcd56; /* アイコンのケーキのような黄色 */
-    color: #555; /* テキストカラーを濃いめに */
-    box-shadow: 0 4px 10px rgba(255, 205, 86, 0.2);
-}
-
-.edit-button:hover {
-    background-color: #eac04f;
-    box-shadow: 0 6px 15px rgba(255, 205, 86, 0.3);
-}
-
-/* Utility button group */
-.utility-buttons {
-    display: flex;
-    gap: 12px; /* 少し広げる */
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.utility-buttons button {
-    margin-right: 0;
-}
-
-/* Link List Styles */
-#link-list {
-    list-style: none;
-    padding: 0;
-}
-
-#link-list li {
-    background-color: #ffffff; /* リストアイテムも白に統一 */
-    border: 1px solid #e5e5e5; /* より柔らかいボーダー */
-    padding: 20px; /* パディングを少し増やす */
-    margin-bottom: 15px; /* マージンも少し増やす */
-    border-radius: 14px; /* リストアイテムの角丸も強調 */
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* スペースを少し広げる */
-    position: relative;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 優しい初期シャドウ */
-}
-
-#link-list li:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09); /* ホバー時に影を強調 */
-    border-color: #d8d8d8;
-    transform: translateY(-2px); /* わずかに浮き上がる */
-}
-
-.link-title {
-    font-size: 1.3em; /* タイトルを少し大きく */
-    font-weight: 700; /* よりしっかりとした太さ */
-    color: #2c3e50; /* 濃いめのグレーで強調 */
-    margin-bottom: 5px;
-}
-
-#link-list li a {
-    color: #4a90e2; /* アイコンの青に合わせる */
-    text-decoration: none;
-    word-break: break-all;
-    font-weight: 400; /* 通常の太さ */
-}
-
-#link-list li a:hover {
-    text-decoration: underline;
-    color: #2a8ed6;
-}
-
-.tags-container {
-    margin-top: 10px; /* マージンを少し増やす */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px; /* タグ間のスペースを少し広げる */
-}
-
-.tag {
-    background-color: #d1ecf1; /* アイコンの緑の目のような、少し優しい水色 */
-    color: #2096a7; /* 濃いめのターコイズブルー */
-    padding: 6px 12px; /* パディングを少し増やす */
-    border-radius: 8px; /* タグの角丸も強調 */
-    font-size: 0.88em; /* 少し大きく */
-    white-space: nowrap;
-    font-weight: 500;
-}
-
-.link-actions {
-    display: flex;
-    gap: 10px; /* スペースを少し広げる */
-    margin-top: 15px; /* マージンを少し増やす */
-    justify-content: flex-end;
-}
-
-.link-actions button {
-    padding: 9px 18px; /* アクションボタンのパディングも調整 */
-    font-size: 0.95em;
-    box-shadow: none; /* アクションボタンの影は控えめに */
-}
-.link-actions button:hover {
-    transform: translateY(-1px); /* アクションボタンの浮き上がりは控えめに */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-
-/* Search and Sort Section */
-.filter-sort-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* 少し広げる */
-    margin-bottom: 30px; /* マージンを増やす */
-    align-items: center;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px; /* 最大幅を設定 */
+    box-sizing: border-box;
+    margin-top: 50px; /* 上部に少し余白 */
 }
 
-.filter-sort-section input[type="text"] {
-    flex-grow: 1;
-    margin-bottom: 0;
-    border-radius: 10px; /* 検索入力も角丸に */
+.profile-section {
+    margin-bottom: 30px;
 }
 
-.filter-sort-section select {
-    padding: 11px 15px; /* パディングを調整 */
-    border: 1px solid #ccc;
-    border-radius: 10px; /* セレクトボックスも角丸に */
-    font-size: 1em;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* 円形にする */
+    object-fit: cover; /* 画像がはみ出さないように */
+    border: 4px solid #4CAF50; /* プロフィール画像のボーダー */
+    margin-bottom: 15px;
 }
 
-.filter-sort-section select:focus {
-    border-color: #36a2eb;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(54, 162, 235, 0.2);
+h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-/* Responsive Adjustments */
+p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.links-section {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    gap: 15px; /* リンク間のスペース */
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #007bff; /* 青色のボタン */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-link:hover {
+    background-color: #0056b3; /* ホバーで少し濃く */
+    transform: translateY(-2px); /* 少し浮き上がる */
+}
+
+.social-link i {
+    margin-right: 10px;
+    font-size: 1.3em;
+}
+
+/* スマートフォン向けの調整 */
 @media (max-width: 600px) {
-    body {
-        padding: 15px;
-    }
-
     .container {
         padding: 20px;
-        border-radius: 12px;
+        margin-top: 20px;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 
-    button {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
+    p {
+        font-size: 1em;
     }
 
-    .utility-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .filter-sort-section {
-        flex-direction: column;
-        gap: 10px;
-        align-items: stretch;
-    }
-
-    .filter-sort-section input[type="text"] {
-        width: 100%;
-    }
-
-    #link-list li {
-        padding: 18px;
-        border-radius: 12px;
-    }
-
-    .link-actions {
-        flex-direction: column;
-        gap: 8px;
+    .social-link {
+        padding: 12px 15px;
+        font-size: 1em;
     }
 }
