@@ -1,256 +1,100 @@
-/* 基本設定 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #333;
-  line-height: 1.6;
-  transition: background 0.3s ease;
-}
-
-body.dark-mode {
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5; /* 薄いグレーの背景 */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 上部に寄せる */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* 全体の余白 */
+    box-sizing: border-box; /* パディングを幅に含める */
 }
 
 .container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    background-color: #ffffff; /* 白い背景 */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px; /* 最大幅を設定 */
+    box-sizing: border-box;
+    margin-top: 50px; /* 上部に少し余白 */
 }
 
-/* ダークモード切り替えボタン */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.profile-section {
+    margin-bottom: 30px;
 }
 
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.theme-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-
-.theme-toggle:hover .theme-icon {
-  transform: rotate(15deg);
-}
-
-/* ヘッダー */
-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  flex-shrink: 0;
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* 円形にする */
+    object-fit: cover; /* 画像がはみ出さないように */
+    border: 4px solid #4CAF50; /* プロフィール画像のボーダー */
+    margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-.subtitle {
-  color: rgba(255,255,255,0.9);
-  font-size: 1.1rem;
-  font-weight: 300;
+p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
 }
 
-/* メインコンテンツ */
-.links-container {
-  flex: 1;
+.links-section {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    gap: 15px; /* リンク間のスペース */
 }
 
-/* セクション */
-.link-section {
-  margin-bottom: 2.5rem;
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #007bff; /* 青色のボタン */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.link-section h2 {
-  color: white;
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+.social-link:hover {
+    background-color: #0056b3; /* ホバーで少し濃く */
+    transform: translateY(-2px); /* 少し浮き上がる */
 }
 
-/* リンクリスト */
-.links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.social-link i {
+    margin-right: 10px;
+    font-size: 1.3em;
 }
 
-.link-card {
-  display: block;
-  padding: 1rem 1.5rem;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  font-size: 1.1rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+/* スマートフォン向けの調整 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin-top: 20px;
+    }
 
-.link-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
+    h1 {
+        font-size: 1.8em;
+    }
 
-.link-card:hover::before {
-  left: 100%;
-}
+    p {
+        font-size: 1em;
+    }
 
-.link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    .social-link {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
 }
-
-/* プラットフォーム別カラー */
-.twitter {
-  background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
-}
-
-.instagram {
-  background: linear-gradient(135deg, #E4405F, #C13584);
-}
-
-.youtube {
-  background: linear-gradient(135deg, #FF0000, #CC0000);
-}
-
-.discord {
-  background: linear-gradient(135deg, #7289DA, #5865F2);
-}
-
-.note {
-  background: linear-gradient(135deg, #41C9B4, #2BB8A3);
-}
-
-.misskey {
-  background: linear-gradient(135deg, #86B300, #6B8F00);
-}
-
-.threads {
-  background: linear-gradient(135deg, #000000, #333333);
-}
-
-/* フッター */
-footer {
-  text-align: center;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  flex-shrink: 0;
-}
-
-footer p {
-  color: rgba(255,255,255,0.7);
-  font-size: 0.9rem;
-  font-weight: 300;
-}
-
-/* レスポンシブデザイン */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  .link-card {
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
-  }
-  
-  .theme-toggle {
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-  }
-  
-  .link-section h2 {
-    font-size: 1.1rem;
-  }
-}
-
-/* アニメーション */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.link-section {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.link-section:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.link-section:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-/* システムのダークモード対応 */
-@media (prefers-color-scheme: dark) {
-  body:not(.light-mode) {
-    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  }
-} 
