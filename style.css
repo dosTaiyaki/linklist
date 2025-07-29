@@ -1,9 +1,12 @@
-/* Google Fontsの読み込み - Montserrat と Noto Sans JP を使用 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+/* Google Fontsの読み込み - Noto Sans JP と Raleway を使用 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Raleway:wght@400;700&display=swap');
 
 body {
     font-family: 'Noto Sans JP', sans-serif; /* 日本語対応フォントを優先 */
-    background: linear-gradient(135deg, #e0f2f7 0%, #c1e8f2 100%); /* 非常に薄い青系のグラデーション背景 - Lit.linkのようなニュアンス */
+    background-color: #f8f8f8; /* Lit.linkに多い、非常に淡いグレーの背景 */
+    /* または、もっと淡いグラデーションにしたい場合：
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    */
     display: flex;
     justify-content: center;
     align-items: center; /* 垂直方向も中央に */
@@ -11,22 +14,148 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    color: #333; /* 基本の文字色を暗めに */
+    color: #333; /* 基本の文字色 */
     overflow-x: hidden; /* 横スクロールバーが出ないように */
 }
 
 .container {
     background-color: #ffffff;
-    border-radius: 16px; /* 丸みを調整 */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* 影を調整 */
-    padding: 35px; /* パディングを調整 */
+    border-radius: 12px; /* 少し控えめな丸み */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* 控えめな影 */
+    padding: 30px; /* パディングを調整 */
     text-align: center;
     width: 100%;
-    max-width: 480px; /* Lit.linkに近づけるため少し狭める */
+    max-width: 420px; /* さらに少し狭めて、中央に集約された感じを強調 */
     box-sizing: border-box;
     position: relative;
     z-index: 1;
-    animation: fadeInScale 0.6s ease-out; /* 読み込み時のフェードインアニメーション */
+    animation: fadeInScale 0.5s ease-out; /* 読み込み時のフェードインアニメーション */
 }
 
-@keyframes fadeIn
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.profile-section {
+    margin-bottom: 25px; /* 余白を調整 */
+}
+
+.profile-image {
+    width: 100px; /* 少し小さめに調整 */
+    height: 100px; /* 少し小さめに調整 */
+    border-radius: 50%;
+    object-fit: cover;
+    /* フチは引き続きなし */
+    margin-bottom: 15px; /* 余白を調整 */
+    transition: transform 0.15s ease-out; /* ホバーアニメーションをより軽快に */
+}
+
+.profile-image:hover {
+    transform: scale(1.02); /* ホバーでわずかに拡大 */
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif; /* よりシンプルな英語系フォントをタイトルに */
+    font-size: 2.2em; /* サイズを調整 */
+    color: #222; /* 濃いめの黒 */
+    margin-bottom: 5px;
+    letter-spacing: 0.2px; /* 文字間隔を調整 */
+}
+
+p {
+    font-size: 1em; /* サイズを標準に */
+    color: #666; /* やや薄めの文字色 */
+    line-height: 1.5;
+    max-width: 380px; /* 文章の幅を制限 */
+    margin: 0 auto;
+}
+
+.links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* リンク間のスペースを調整 */
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px; /* パディングを調整 */
+    background-color: #4A90E2; /* シンプルな青色をデフォルトに */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px; /* 丸みを調整 */
+    font-size: 1.05em; /* 文字サイズを調整 */
+    font-weight: 500; /* 太さを少し抑える */
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 控えめな影 */
+}
+
+.social-link:hover {
+    background-color: #367ac8; /* ホバーで少し濃く */
+    transform: translateY(-0.5px); /* わずかに浮き上がる */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 影を調整 */
+}
+
+.social-link i {
+    margin-right: 8px; /* アイコンと文字の間隔を調整 */
+    font-size: 1.2em; /* アイコンサイズを調整 */
+    color: rgba(255, 255, 255, 0.9); /* アイコンの色は統一感を保つ */
+}
+
+/* script.js で使用するクリック時のアニメーションを調整 */
+.social-link.clicked {
+    background-color: #2a64a8; /* クリック時にさらに濃く */
+    transform: translateY(0) scale(0.98); /* わずかに縮む程度に */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* スマートフォン向けの調整 */
+@media (max-width: 600px) {
+    body {
+        padding: 15px 10px; /* 左右のパディングを減らす */
+    }
+    .container {
+        padding: 25px;
+        margin-top: 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        border-radius: 10px;
+        max-width: 95%; /* より画面いっぱいに */
+    }
+
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .links-section {
+        gap: 10px;
+    }
+
+    .social-link {
+        padding: 12px 15px;
+        font-size: 0.95em;
+        border-radius: 5px;
+    }
+
+    .social-link i {
+        font-size: 1em;
+        margin-right: 5px;
+    }
+}
