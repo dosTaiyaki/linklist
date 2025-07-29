@@ -1,72 +1,52 @@
-　<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Lit.Link Style Profile</title>
+    <title>たい焼き土師のリンク集</title>
     <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
-    <div class="background-overlay"></div> <div class="container">
-        <section class="profile-section">
-            <div class="profile-avatar-container">
-                <img src="https://via.placeholder.com/150/007bff/FFFFFF?text=Avatar" alt="Profile Avatar" class="profile-avatar">
-            </div>
-            <h1 class="profile-name">Your Name Here</h1>
-            <p class="profile-bio">
-                ここに簡単な自己紹介やキャッチフレーズが入ります。<br>
-                複数のSNSやウェブサイトへのリンクをまとめましょう！
-            </p>
-        </section>
+    <div class="container">
+        <div class="profile-section">
+            <img src="your-profile-image.jpg" alt="あなたのプロフィール画像" class="profile-image">
+            <h1>たい焼き土師</h1>
+            <p>ここにあなたの簡単な自己紹介文が入ります。活動内容や興味のあることなどを書くと良いでしょう。</p>
+        </div>
 
-        <section class="link-list-section">
-            <ul id="link-list">
-                <p class="no-links-message">リンクがありません。追加してください。</p>
-            </ul>
-        </section>
-
-        <section class="admin-section">
-            <h2>管理機能</h2>
-            <div class="form-section">
-                <h3>リンク追加/編集</h3>
-                <form id="link-form">
-                    <div>
-                        <label for="title">リンク名:</label>
-                        <input type="text" id="title" required placeholder="例: X (旧Twitter), YouTubeチャンネル">
-                    </div>
-                    <div>
-                        <label for="url">URL:</label>
-                        <input type="url" id="url" required placeholder="例: https://twitter.com/yourname">
-                    </div>
-                    <div>
-                        <label for="iconClass">アイコンクラス (任意):</label>
-                        <input type="text" id="iconClass" placeholder="例: fab fa-twitter (Font Awesomeクラス)">
-                        <small>Font Awesomeアイコンを使いたい場合 (例: `fab fa-twitter`, `fab fa-youtube`)。別途Font Awesomeの導入が必要です。</small>
-                    </div>
-                    <button type="submit">リンクを追加/更新</button>
-                </form>
+        <div class="links-section">
+            <a href="https://www.instagram.com/taiyakidos" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://x.com/Taiyakidos" target="_blank" class="social-link">
+                <i class="fab fa-x-twitter"></i> X (メイン)
+            </a>
+            <a href="https://www.youtube.com/@Taiyakidos" target="_blank" class="social-link">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://note.com/taiyakidos" target="_blank" class="social-link">
+                <i class="fas fa-sticky-note"></i> note
+            </a>
+            <a href="https://misskey.io/@Taiyakidos" target="_blank" class="social-link">
+                <i class="fas fa-hand-spock"></i> Misskey
+            </a>
+            <a href="https://www.threads.com/@taiyakidos" target="_blank" class="social-link">
+                <i class="fab fa-threads"></i> Threads
+            </a>
+            <a href="https://discord.com/users/813386818644213761" target="_blank" class="social-link">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://x.com/Taiyakidos_best" target="_blank" class="social-link">
+                <i class="fab fa-x-twitter"></i> X (ベスト版)
+            </a>
+            <a href="https://x.com/Taiyakidos_" target="_blank" class="social-link">
+                <i class="fab fa-x-twitter"></i> X (サブ1)
+            </a>
+            <a href="https://x.com/Taiyakidos_sub" target="_blank" class="social-link">
+                <i class="fab fa-x-twitter"></i> X (サブ2)
+            </a>
             </div>
-
-            <div class="filter-sort-section">
-                <h3>リンク検索/ソート</h3>
-                <input type="text" id="search-input" placeholder="リンクを検索...">
-                <button id="clear-search">検索クリア</button>
-                <select id="sort-select">
-                    <option value="none">ソート順</option>
-                    <option value="title-asc">名前順 (A-Z)</option>
-                    <option value="title-desc">名前順 (Z-A)</option>
-                </select>
-            </div>
-
-            <div class="utility-buttons">
-                <h3>データ管理</h3>
-                <input type="file" id="import-file-input" accept=".json" style="display: none;">
-                <label for="import-file-input" class="button">JSONからインポート</label>
-                <button id="export-button">JSONへエクスポート</button>
-            </div>
-        </section>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
