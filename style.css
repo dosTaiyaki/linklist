@@ -105,6 +105,19 @@ footer {
   font-size: 0.95rem;
 }
 
+/* プロフィール画像 */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(135,206,235,0.18);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* レスポンシブ */
 @media (max-width: 600px) {
   .container {
