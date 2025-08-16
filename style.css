@@ -1,4 +1,4 @@
-/* グラデーション背景 */
+/* --- ベーススタイル --- */
 body {
   margin: 0;
   font-family: 'Inter', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -6,17 +6,17 @@ body {
   min-height: 100vh;
 }
 
-/* コンテナ中央揃え・白背景・丸み */
+/* --- コンテナ --- */
 .container {
   max-width: 480px;
   margin: 40px auto;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9); /* 半透明に改善 */
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   padding: 32px 24px;
 }
 
-/* ヘッダー */
+/* --- ヘッダー --- */
 header {
   text-align: center;
   margin-bottom: 24px;
@@ -33,7 +33,7 @@ header h1 {
   font-size: 1.1rem;
 }
 
-/* プロフィール画像 */
+/* --- プロフィール画像 --- */
 .profile-img {
   width: 120px;
   height: 120px;
@@ -46,7 +46,7 @@ header h1 {
   margin-right: auto;
 }
 
-/* リンクカード */
+/* --- リンクカード --- */
 .links {
   list-style: none;
   padding: 0;
@@ -66,6 +66,8 @@ header h1 {
   transition: transform 0.1s, box-shadow 0.1s;
   text-align: center;
   letter-spacing: 0.5px;
+  position: relative; /* JavaScriptから移動 */
+  overflow: hidden;  /* JavaScriptから移動 */
 }
 .link-card:hover {
   transform: translateY(-2px) scale(1.03);
@@ -73,7 +75,7 @@ header h1 {
   opacity: 0.95;
 }
 
-/* 各SNSごとの色（必要に応じて調整） */
+/* --- 各SNSごとの色（必要に応じて調整） --- */
 .twitter { background: linear-gradient(90deg, #1da1f2 0%, #87ceeb 100%); }
 .instagram { background: linear-gradient(90deg, #fdc468 0%, #fa7e1e 100%); }
 .youtube { background: linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%); }
@@ -82,7 +84,7 @@ header h1 {
 .misskey { background: linear-gradient(90deg, #ffd700 0%, #87ceeb 100%); }
 .threads { background: linear-gradient(90deg, #000 0%, #fff 100%); color: #222; }
 
-/* セクションタイトル */
+/* --- セクションタイトル --- */
 .link-section h2 {
   font-size: 1.2rem;
   margin: 24px 0 12px 0;
@@ -90,7 +92,7 @@ header h1 {
   font-weight: 700;
 }
 
-/* ダークモード切り替えボタン */
+/* --- ダークモード切り替えボタン --- */
 .theme-toggle {
   position: absolute;
   top: 24px;
@@ -110,7 +112,7 @@ header h1 {
   color: #fff;
 }
 
-/* フッター */
+/* --- フッター --- */
 footer {
   text-align: center;
   margin-top: 32px;
@@ -118,7 +120,7 @@ footer {
   font-size: 0.95rem;
 }
 
-/* レスポンシブ */
+/* --- レスポンシブ --- */
 @media (max-width: 600px) {
   .container {
     padding: 16px 6px;
@@ -128,4 +130,45 @@ footer {
     padding: 14px 8px;
     font-size: 1rem;
   }
+}
+
+---
+
+### ダークモードの改善
+
+ダークモードのスタイルをまとめて、コードの読みやすさを改善しました。
+
+```css
+/* --- ダークモードのスタイル --- */
+body.dark-mode {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a232e 100%);
+}
+
+.dark-mode .container {
+  background: rgba(42, 42, 42, 0.9); /* 半透明に改善 */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode .subtitle {
+  color: #eee;
+}
+
+.dark-mode .subtitle {
+  color: #87ceeb; /* ダークモードでも青系を維持 */
+}
+
+.dark-mode .theme-toggle {
+  background: #444;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.dark-mode .theme-toggle:hover {
+  background: #555;
+}
+
+.dark-mode footer {
+  color: #777;
 }
