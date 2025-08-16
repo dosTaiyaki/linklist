@@ -111,12 +111,21 @@ document.addEventListener('DOMContentLoaded', function() {
   document.head.appendChild(style);
 });
 
-// スクロールアニメーション（独立）
+// スクロールアニメーションをrequestAnimationFrameでスムーズに
+let ticking = false;
+
 window.addEventListener('scroll', function() {
   const scrolled = window.pageYOffset;
   const parallax = document.querySelector('.container');
-  const speed = scrolled * 0.5;
-  if (parallax) {
-    parallax.style.transform = `translateY(${speed}px)`;
+
+  if (!ticking) {
+    window.requestAnimationFrame(function() {
+      const speed = scrolled * 0.5;
+      if (parallax) {
+        parallax.style.transform = `translateY(${speed}px)`;
+      }
+      ticking = false;
+    });
+    ticking = true;
   }
 });
