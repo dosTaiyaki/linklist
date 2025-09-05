@@ -4,7 +4,8 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f0f0f0;
+  /* 背景色を温かみのあるグラデーションに変更 */
+  background: linear-gradient(135deg, #f8e1c1, #d7a67a);
   min-height: 100vh;
 }
 
