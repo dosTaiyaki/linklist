@@ -1,49 +1,45 @@
+/* リットリンク風デザイン */
+
 /* ベーススタイル */
 body {
   margin: 0;
-  font-family: 'Inter', 'Yu Gothic', 'Meiryo', sans-serif;
-  background: linear-gradient(135deg, #87ceeb 0%, #90ee90 100%);
+  font-family: 'Inter', sans-serif;
+  background: #f0f0f0;
   min-height: 100vh;
 }
 
 /* コンテナ */
 .container {
-  max-width: 480px;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.9); /* 半透明に改善 */
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 32px 24px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 32px;
+  text-align: center;
 }
 
 /* ヘッダー */
 header {
-  text-align: center;
   margin-bottom: 24px;
 }
-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 8px;
-  font-weight: 700;
-  color: #333;
-}
-.subtitle {
-  color: #87ceeb;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-/* プロフィール画像 */
-.profile-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+header .profile-img {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #87ceeb;
   border-radius: 50%;
   margin-bottom: 16px;
-  box-shadow: 0 4px 16px rgba(135,206,235,0.18);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+}
+header h1 {
+  font-size: 1.8rem;
+  margin: 4px 0;
+  color: #333;
+}
+header p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
 }
 
 /* リンクカード */
@@ -54,67 +50,32 @@ header h1 {
 }
 .link-card {
   display: block;
-  background: linear-gradient(90deg, #87ceeb 0%, #90ee90 100%);
+  width: 100%;
+  background: #87ceeb;
   color: #fff;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
-  margin: 12px 0;
-  padding: 18px 24px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(135,206,235,0.12);
-  transition: transform 0.1s, box-shadow 0.1s;
-  text-align: center;
-  letter-spacing: 0.5px;
-  position: relative; /* JavaScriptから移動 */
-  overflow: hidden;  /* JavaScriptから移動 */
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
 }
 .link-card:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 16px rgba(135,206,235,0.18);
-  opacity: 0.95;
+  background: #90ee90;
 }
 
-/* 各SNSごとの色（必要に応じて調整） */
-.twitter { background: linear-gradient(90deg, #1da1f2 0%, #87ceeb 100%); }
-.instagram { background: linear-gradient(90deg, #fdc468 0%, #fa7e1e 100%); }
-.youtube { background: linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%); }
-.discord { background: linear-gradient(90deg, #7289da 0%, #90ee90 100%); }
-.note { background: linear-gradient(90deg, #00c300 0%, #90ee90 100%); }
-.misskey { background: linear-gradient(90deg, #ffd700 0%, #87ceeb 100%); }
-.threads { background: linear-gradient(90deg, #000 0%, #fff 100%); color: #222; }
-
-/* セクションタイトル */
-.link-section h2 {
-  font-size: 1.2rem;
-  margin: 24px 0 12px 0;
-  color: #333;
-  font-weight: 700;
-}
-
-/* ダークモード切り替えボタン */
-.theme-toggle {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  box-shadow: 0 2px 8px rgba(135,206,235,0.12);
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: background 0.2s;
-}
-.theme-toggle:hover {
-  background: #87ceeb;
-  color: #fff;
-}
+/* SNSごとの色 */
+.link-card.twitter { background: #1da1f2; }
+.link-card.instagram { background: #fdc468; }
+.link-card.youtube { background: #ff5f6d; }
+.link-card.discord { background: #7289da; }
+.link-card.note { background: #00c300; }
+.link-card.misskey { background: #ffd700; color: #333; }
+.link-card.threads { background: #000; color: #fff; }
 
 /* フッター */
 footer {
-  text-align: center;
   margin-top: 32px;
   color: #aaa;
   font-size: 0.95rem;
@@ -123,45 +84,37 @@ footer {
 /* レスポンシブ */
 @media (max-width: 600px) {
   .container {
-    padding: 16px 6px;
+    padding: 16px;
     max-width: 98vw;
   }
   .link-card {
-    padding: 14px 8px;
+    padding: 12px;
     font-size: 1rem;
   }
 }
 
-/* ダークモードのスタイル */
+/* ダークモード */
 body.dark-mode {
-  background: linear-gradient(135deg, #2c3e50 0%, #1a232e 100%);
+  background: #2c3e50;
 }
-
-.dark-mode .container {
-  background: rgba(42, 42, 42, 0.9);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+body.dark-mode .container {
+  background: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode .subtitle {
+body.dark-mode header h1,
+body.dark-mode header p {
   color: #eee;
 }
-
-.dark-mode .subtitle {
-  color: #87ceeb; /* ダークモードでも青系を維持 */
-}
-
-.dark-mode .theme-toggle {
-  background: #444;
+body.dark-mode .link-card {
   color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-
-.dark-mode .theme-toggle:hover {
-  background: #555;
-}
-
-.dark-mode footer {
+body.dark-mode .link-card.twitter { background: #1a91da; }
+body.dark-mode .link-card.instagram { background: #faa14f; }
+body.dark-mode .link-card.youtube { background: #e04a57; }
+body.dark-mode .link-card.discord { background: #5d78a8; }
+body.dark-mode .link-card.note { background: #009b00; }
+body.dark-mode .link-card.misskey { background: #e5c900; color: #333; }
+body.dark-mode .link-card.threads { background: #111; color: #ddd; }
+body.dark-mode footer {
   color: #777;
 }
