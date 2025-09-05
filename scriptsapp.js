@@ -1,7 +1,6 @@
 // ウェブページ全体のインタラクティブ機能
 document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById('theme-toggle');
-  // .theme-iconの取得を個別にチェック
   const themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
@@ -9,10 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function setTheme(dark) {
     if (themeToggle) {
       document.body.classList.toggle('dark-mode', dark);
-      // themeIconが存在する場合のみ更新
-      if (themeIcon) {
-        themeIcon.textContent = dark ? '☀️' : '🌙';
-      }
+      themeIcon.textContent = dark ? '☀️' : '🌙';
       localStorage.setItem('theme', dark ? 'dark' : 'light');
     }
   }

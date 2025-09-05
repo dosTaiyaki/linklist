@@ -1,4 +1,4 @@
-/* --- ベーススタイル --- */
+/* ベーススタイル */
 body {
   margin: 0;
   font-family: 'Inter', 'Yu Gothic', 'Meiryo', sans-serif;
@@ -6,7 +6,7 @@ body {
   min-height: 100vh;
 }
 
-/* --- コンテナ --- */
+/* コンテナ */
 .container {
   max-width: 480px;
   margin: 40px auto;
@@ -16,7 +16,7 @@ body {
   padding: 32px 24px;
 }
 
-/* --- ヘッダー --- */
+/* ヘッダー */
 header {
   text-align: center;
   margin-bottom: 24px;
@@ -33,7 +33,7 @@ header h1 {
   font-size: 1.1rem;
 }
 
-/* --- プロフィール画像 --- */
+/* プロフィール画像 */
 .profile-img {
   width: 120px;
   height: 120px;
@@ -46,7 +46,7 @@ header h1 {
   margin-right: auto;
 }
 
-/* --- リンクカード --- */
+/* リンクカード */
 .links {
   list-style: none;
   padding: 0;
@@ -75,7 +75,7 @@ header h1 {
   opacity: 0.95;
 }
 
-/* --- 各SNSごとの色（必要に応じて調整） --- */
+/* 各SNSごとの色（必要に応じて調整） */
 .twitter { background: linear-gradient(90deg, #1da1f2 0%, #87ceeb 100%); }
 .instagram { background: linear-gradient(90deg, #fdc468 0%, #fa7e1e 100%); }
 .youtube { background: linear-gradient(90deg, #ff5f6d 0%, #ffc371 100%); }
@@ -84,7 +84,7 @@ header h1 {
 .misskey { background: linear-gradient(90deg, #ffd700 0%, #87ceeb 100%); }
 .threads { background: linear-gradient(90deg, #000 0%, #fff 100%); color: #222; }
 
-/* --- セクションタイトル --- */
+/* セクションタイトル */
 .link-section h2 {
   font-size: 1.2rem;
   margin: 24px 0 12px 0;
@@ -92,7 +92,7 @@ header h1 {
   font-weight: 700;
 }
 
-/* --- ダークモード切り替えボタン --- */
+/* ダークモード切り替えボタン */
 .theme-toggle {
   position: absolute;
   top: 24px;
@@ -112,7 +112,7 @@ header h1 {
   color: #fff;
 }
 
-/* --- フッター --- */
+/* フッター */
 footer {
   text-align: center;
   margin-top: 32px;
@@ -120,7 +120,7 @@ footer {
   font-size: 0.95rem;
 }
 
-/* --- レスポンシブ --- */
+/* レスポンシブ */
 @media (max-width: 600px) {
   .container {
     padding: 16px 6px;
@@ -132,20 +132,13 @@ footer {
   }
 }
 
----
-
-### ダークモードの改善
-
-ダークモードのスタイルをまとめて、コードの読みやすさを改善しました。
-
-```css
-/* --- ダークモードのスタイル --- */
+/* ダークモードのスタイル */
 body.dark-mode {
   background: linear-gradient(135deg, #2c3e50 0%, #1a232e 100%);
 }
 
 .dark-mode .container {
-  background: rgba(42, 42, 42, 0.9); /* 半透明に改善 */
+  background: rgba(42, 42, 42, 0.9);
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
