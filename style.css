@@ -79,6 +79,7 @@ header p {
 .link-card.note { background: #00c300; }
 .link-card.misskey { background: #ffd700; color: #333; }
 .link-card.threads { background: #000; color: #fff; }
+.link-card.mail { background: linear-gradient(90deg, #6a9cff, #4677ff); }
 
 /* フッター */
 footer {
@@ -106,6 +107,14 @@ footer {
   transform: scale(0);
   pointer-events: none;
 }
+
+/* SVG アイコンの微調整 */
+.link-card svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-note { color: #fff; }
+.icon-misskey { color: #333; }
 
 /* テーマ切替ボタン */
 .theme-toggle {
