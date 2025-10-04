@@ -147,12 +147,6 @@ footer {
 .icon-note { color: #fff; }
 .icon-misskey { color: #333; }
 
-/* フォーカスとアクセシビリティ改善 */
-.theme-toggle:focus-visible,
-.link-card:focus-visible {
-  box-shadow: 0 0 0 4px rgba(100,150,255,0.12);
-}
-
 /* テーマ切替ボタン */
 .theme-toggle {
   position: absolute;
@@ -197,4 +191,10 @@ body.dark-mode .link-card.misskey { background: #e5c900; color: #333; }
 body.dark-mode .link-card.threads { background: #111; color: #ddd; }
 body.dark-mode footer {
   color: #777;
+}
+
+/* フォーカスとアクセシビリティ改善 */
+.theme-toggle:focus-visible,
+.link-card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(100,150,255,0.12);
 }
