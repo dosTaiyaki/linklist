@@ -71,37 +71,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // リンクカードのインタラクティブ機能
   linkCards.forEach(card => {
-    // ホバー効果
-    card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-5px) scale(1.02)');
-    card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
-    
-    // クリック時のリップル効果
-    card.addEventListener('click', function(e) {
-      const ripple = document.createElement('span');
+    // ホバー効果（CSS の方が滑らかだが JS でも制御）
+    card.addEventListener('mouseenter', () => card.style.boxShadow = '0 8px 18px rgba(0,0,0,0.12)');
+    card.addEventListener('mouseleave', () => card.style.boxShadow = '');
+
+    // pointerdown でリップル生成（タッチ対応）
+    card.addEventListener('pointerdown', function(e) {
       const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
+      const size = Math.max(rect.width, rect.height) * 1.2;
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
-      
-      ripple.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        left: ${x}px;
-        top: ${y}px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-      `;
-      
-      this.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 600);
 
-      // クリック時の視覚的フィードバック
-      this.style.transform = 'scale(0.98)';
-      setTimeout(() => this.style.transform = '', 150);
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.style.background = 'rgba(255,255,255,0.25)';
+      ripple.style.animation = 'ripple 600ms linear';
+
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
     });
   });
   
@@ -120,7 +110,8 @@ window.addEventListener('scroll', function() {
 
   if (!ticking) {
     window.requestAnimationFrame(function() {
-      const speed = scrolled * 0.5;
+      // 小さめのパララックスに抑える
+      const speed = scrolled * 0.05;
       if (parallax) {
         parallax.style.transform = `translateY(${speed}px)`;
       }

@@ -50,20 +50,25 @@ header p {
   margin: 0;
 }
 .link-card {
-  display: block;
+  position: relative; /* ripple 要素を相対配置 */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   width: 100%;
+  box-sizing: border-box;
   background: #87ceeb;
   color: #fff;
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 14px 16px;
   margin-bottom: 12px;
-  border-radius: 10px;
-  transition: background 0.2s ease;
+  border-radius: 12px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
+  overflow: hidden;
 }
-.link-card:hover {
-  background: #90ee90;
+.link-card:active {
+  transform: scale(0.995);
 }
 
 /* SNSごとの色 */
@@ -93,6 +98,34 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* ripple 用のスタイル */
+.link-card > span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+/* テーマ切替ボタン */
+.theme-toggle {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: inherit;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+}
+
+.header-wrapper { position: relative; }
+
 
 /* ダークモード */
 body.dark-mode {
