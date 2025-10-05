@@ -91,8 +91,8 @@ header p {
 .link-card.instagram { background: #fdc468; }
 .link-card.youtube { background: #ff5f6d; }
 .link-card.discord { background: #7289da; }
-.link-card.note { background: #00c300; }
-.link-card.misskey { background: #ffd700; color: #333; }
+.link-card.note { background: #41C9B4; }
+.link-card.misskey { background: #86b300; color: white; }
 .link-card.threads { background: #000; color: #fff; }
 .link-card.mail { background: linear-gradient(90deg, #6a9cff, #4677ff); }
 
@@ -137,15 +137,22 @@ footer {
   pointer-events: none;
 }
 
-/* SVG アイコンの微調整 */
-.link-card svg {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
+/* アイコンの微調整 */
+.link-card i {
+  font-size: 1.1em;
+  width: 1.25em;
+  text-align: center;
+  vertical-align: -0.125em;
 }
-.icon-note { color: #fff; }
-.icon-misskey { color: #333; }
+
+/* note と Misskey のロゴアイコン */
+.icon-note,
+.icon-misskey {
+  width: 1.25em;
+  height: 1.25em;
+  margin-right: 0.5em;
+  color: white;
+}
 
 /* テーマ切替ボタン */
 .theme-toggle {
