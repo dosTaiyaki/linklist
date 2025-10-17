@@ -148,53 +148,39 @@ footer {
 .icon-misskey { color: #333; }
 
 /* フォーカスとアクセシビリティ改善 */
-.theme-toggle:focus-visible,
+/* theme-toggle の :focus-visible は削除 */
 .link-card:focus-visible {
   box-shadow: 0 0 0 4px rgba(100,150,255,0.12);
 }
 
-/* テーマ切替ボタン */
-.theme-toggle {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: inherit;
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  font-weight: 600;
-}
-
-.header-wrapper { position: relative; }
-
-
-/* ダークモード */
-body.dark-mode {
-  background: #2c3e50;
-}
-body.dark-mode .container {
-  background: #2a2a2a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-body.dark-mode header h1,
-body.dark-mode header p {
-  color: #eee;
-}
-body.dark-mode .link-card {
-  color: #fff;
-}
-body.dark-mode .link-card.twitter { background: #1a91da; }
-body.dark-mode .link-card.instagram { background: #faa14f; }
-body.dark-mode .link-card.youtube { background: #e04a57; }
-body.dark-mode .link-card.discord { background: #5d78a8; }
-body.dark-mode .link-card.note { background: #009b00; }
-body.dark-mode .link-card.misskey { background: #e5c900; color: #333; }
-body.dark-mode .link-card.threads { background: #111; color: #ddd; }
-body.dark-mode footer {
-  color: #777;
+/* ダークモードの自動化 (システム設定と連動) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #2c3e50;
+  }
+  header .profile-img {
+    /* 調整: ダークモードでのボーダー色 */
+    border-color: #5d78a8;
+  }
+  .container {
+    background: #2a2a2a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  header h1,
+  header p {
+    color: #eee;
+  }
+  .link-card {
+    color: #fff;
+  }
+  .link-card.twitter { background: #1a91da; }
+  .link-card.instagram { background: #faa14f; }
+  .link-card.youtube { background: #e04a57; }
+  .link-card.discord { background: #5d78a8; }
+  .link-card.note { background: #009b00; }
+  .link-card.misskey { background: #e5c900; color: #333; }
+  .link-card.threads { background: #111; color: #ddd; }
+  footer {
+    color: #777;
+  }
 }
