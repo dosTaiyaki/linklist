@@ -1,41 +1,8 @@
 // ウェブページ全体のインタラクティブ機能
 document.addEventListener('DOMContentLoaded', function() {
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // 💡 テーマ切り替え関連のコードはすべて削除しました。
+  // ダークモードの切り替えはCSS側で @media (prefers-color-scheme: dark) に完全に依存します。
   
-  // テーマを設定する関数
-  function setTheme(dark) {
-    if (themeToggle) {
-      document.body.classList.toggle('dark-mode', dark);
-      themeIcon.textContent = dark ? '☀️' : '🌙';
-      localStorage.setItem('theme', dark ? 'dark' : 'light');
-    }
-  }
-
-  // 初期テーマの設定
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    setTheme(savedTheme === 'dark');
-  } else {
-    setTheme(prefersDark);
-  }
-
-  // テーマ切り替えボタンのクリックイベント
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const isDark = !document.body.classList.contains('dark-mode');
-      setTheme(isDark);
-    });
-  }
-  
-  // システムのカラーモード変更を監視
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches);
-    }
-  });
-
   // ページ読み込み時のアニメーション
   const linkSections = document.querySelectorAll('.link-section');
   const linkCards = document.querySelectorAll('.link-card');
