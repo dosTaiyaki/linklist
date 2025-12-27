@@ -74,17 +74,16 @@ header p {
 /* リンクカード本体 */
 .link-card {
   position: relative; /* ripple 要素を相対配置 */
-  display: flex; /* inline-flex から flex に変更し、削除ボタン配置に対応 */
-  justify-content: space-between; /* リンクエリアと削除ボタンを両端に寄せる */
+  display: flex;
   align-items: center;
-  gap: 10px; /* リンクエリアと削除ボタンの間隔 */
+  gap: var(--card-gap);
   width: 100%;
   box-sizing: border-box;
   background: #87ceeb;
   color: #fff;
   font-size: clamp(0.98rem, 2.5vw, 1.05rem);
   font-weight: 700;
-  padding: 0 16px; /* 縦パディングを 0 にし、a タグで制御 */
+  padding: 14px 16px;
   margin-bottom: 12px;
   border-radius: calc(var(--radius) - 4px);
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
@@ -104,17 +103,13 @@ header p {
 }
 
 /* リンクエリア (ファビコンとテキストを内包) */
-.link-card a {
-    display: flex;
-    align-items: center; /* 垂直方向の中央揃え */
-    gap: var(--card-gap); /* ファビコンとテキストの間隔 */
-    flex-grow: 1; /* 親の幅いっぱいに広がる */
-    text-decoration: none;
-    color: inherit;
-    /* .link-card で削った縦パディングをここで復活させる */
-    padding: 14px 0;
-    min-height: var(--link-min-height); /* 継承 */
-    box-sizing: border-box;
+.link-card {
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  gap: var(--card-gap); /* ファビコンとテキストの間隔 */
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
 }
 
 /* リンクテキスト */
@@ -243,6 +238,19 @@ footer {
   vertical-align: -0.15em;
   object-fit: contain;
   border-radius: 4px;
+}
+
+/* ラベルのスタイル（アイコンの隣に表示） */
+.link-text {
+  display: inline-block;
+  font-weight: 700;
+  color: inherit;
+}
+
+/* 明示的に左詰めでアイコンとテキストを並べる */
+.link-card {
+  justify-content: flex-start;
+  text-align: left;
 }
 
 /* テーマ切替ボタン */
