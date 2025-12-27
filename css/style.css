@@ -1,11 +1,15 @@
-/* リットリンク風デザイン */
+/*
+ * LinkList Styles - リットリンク風デザイン
+ * ファビコン表示、インタラクティブ性の改善、ダークモード対応
+ */
 
 /* ベーススタイル */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  /* 背景色を温かみのあるグラデーションに変更 */
+  /* 背景色を温かみのあるグラデーションに変更し、固定 */
   background: linear-gradient(135deg, #f8e1c1, #d7a67a);
+  background-attachment: fixed; /* 背景を固定 */
   min-height: 100vh;
 }
 
@@ -53,32 +57,114 @@ header p {
   margin-bottom: 18px;
 }
 
-/* リンクカード */
+/* リンクセクション（LinkListではカテゴリ） */
+.link-section {
+  /* カテゴリラッパー（必要に応じてアニメーション等を追加） */
+  display: block;
+}
+
+/* リンクカードのリスト */
 .links {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: left; /* リスト内の配置を左揃えに戻す */
 }
+
+/* リンクカード本体 */
 .link-card {
   position: relative; /* ripple 要素を相対配置 */
-  display: inline-flex;
+  display: flex; /* inline-flex から flex に変更し、削除ボタン配置に対応 */
+  justify-content: space-between; /* リンクエリアと削除ボタンを両端に寄せる */
   align-items: center;
-  gap: var(--card-gap);
+  gap: 10px; /* リンクエリアと削除ボタンの間隔 */
   width: 100%;
   box-sizing: border-box;
   background: #87ceeb;
   color: #fff;
-  text-decoration: none;
   font-size: clamp(0.98rem, 2.5vw, 1.05rem);
   font-weight: 700;
-  padding: 14px 16px;
+  padding: 0 16px; /* 縦パディングを 0 にし、a タグで制御 */
   margin-bottom: 12px;
   border-radius: calc(var(--radius) - 4px);
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
   overflow: hidden;
   min-height: var(--link-min-height);
-  align-items: center;
+  cursor: pointer;
 }
+
+/* リンクカードのホバー/クリックエフェクト強化 */
+.link-card:hover {
+  transform: scale(0.995); /* ホバーでわずかに縮小 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.link-card:active {
+  transform: scale(0.985); /* クリック時にさらに縮小し、押下感を出す */
+}
+
+/* リンクエリア (ファビコンとテキストを内包) */
+.link-card a {
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+    gap: var(--card-gap); /* ファビコンとテキストの間隔 */
+    flex-grow: 1; /* 親の幅いっぱいに広がる */
+    text-decoration: none;
+    color: inherit;
+    /* .link-card で削った縦パディングをここで復活させる */
+    padding: 14px 0;
+    min-height: var(--link-min-height); /* 継承 */
+    box-sizing: border-box;
+}
+
+/* リンクテキスト */
+.link-card .link-name {
+    flex-grow: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 長すぎるテキストを省略 */
+}
+
+/* ★ ファビコン画像スタイル ★ */
+.link-card .favicon-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;    /* 縮小しないように設定 */
+    border-radius: 4px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
+}
+
+/* リンクカード内のSVGアイコン対応 */
+.link-card svg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.icon-note { color: #fff; }
+.icon-misskey { color: #333; }
+
+
+/* 削除ボタンのスタイル調整 */
+.link-card .delete-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    padding: 0;
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+.link-card .delete-btn:hover {
+    opacity: 1;
+}
+
 
 /* キーボード操作向けフォーカス */
 .link-card:focus-visible {
@@ -91,8 +177,8 @@ header p {
 .link-card.instagram { background: #fdc468; }
 .link-card.youtube { background: #ff5f6d; }
 .link-card.discord { background: #7289da; }
-.link-card.note { background: #41C9B4; }
-.link-card.misskey { background: #86b300; color: white; }
+.link-card.note { background: #00c300; }
+.link-card.misskey { background: #ffd700; color: #333; }
 .link-card.threads { background: #000; color: #fff; }
 .link-card.mail { background: linear-gradient(90deg, #6a9cff, #4677ff); }
 
@@ -103,6 +189,14 @@ footer {
   font-size: 0.95rem;
 }
 
+/* ripple 用のスタイル */
+.link-card > span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+}
+
 /* レスポンシブ */
 @media (max-width: 600px) {
   .container {
@@ -110,10 +204,13 @@ footer {
     max-width: 98vw;
   }
   .link-card {
-    padding: 12px;
+    padding: 0 12px;
     font-size: 1rem;
     gap: 8px;
     min-height: 56px;
+  }
+  .link-card a {
+    padding: 12px 0;
   }
 }
 
@@ -129,13 +226,6 @@ footer {
   .link-card { font-size: 1.05rem; }
 }
 
-/* ripple 用のスタイル */
-.link-card > span.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  pointer-events: none;
-}
 
 /* アイコンの微調整 */
 .link-card i {
@@ -145,7 +235,7 @@ footer {
   vertical-align: -0.125em;
 }
 
-/* note と Misskey のロゴアイコン */
+/* SNS画像アイコン */
 .sns-icon {
   width: 1.25em;
   height: 1.25em;
@@ -174,8 +264,7 @@ footer {
 
 .header-wrapper { position: relative; }
 
-
-/* ダークモード */
+/* ダークモード (手動切替用) */
 body.dark-mode {
   background: #2c3e50;
 }
@@ -187,9 +276,7 @@ body.dark-mode header h1,
 body.dark-mode header p {
   color: #eee;
 }
-body.dark-mode .link-card {
-  color: #fff;
-}
+body.dark-mode .link-card { color: #fff; }
 body.dark-mode .link-card.twitter { background: #1a91da; }
 body.dark-mode .link-card.instagram { background: #faa14f; }
 body.dark-mode .link-card.youtube { background: #e04a57; }
@@ -197,8 +284,26 @@ body.dark-mode .link-card.discord { background: #5d78a8; }
 body.dark-mode .link-card.note { background: #009b00; }
 body.dark-mode .link-card.misskey { background: #e5c900; color: #333; }
 body.dark-mode .link-card.threads { background: #111; color: #ddd; }
-body.dark-mode footer {
-  color: #777;
+body.dark-mode footer { color: #777; }
+
+/* ダークモードの自動化 (システム設定と連動) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #2c3e50;
+    background-attachment: fixed;
+  }
+  header .profile-img { border-color: #5d78a8; }
+  .container { background: #2a2a2a; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+  header h1, header p { color: #eee; }
+  .link-card { color: #fff; }
+  .link-card.twitter { background: #1a91da; }
+  .link-card.instagram { background: #faa14f; }
+  .link-card.youtube { background: #e04a57; }
+  .link-card.discord { background: #5d78a8; }
+  .link-card.note { background: #009b00; }
+  .link-card.misskey { background: #e5c900; color: #333; }
+  .link-card.threads { background: #111; color: #ddd; }
+  footer { color: #777; }
 }
 
 /* フォーカスとアクセシビリティ改善 */
