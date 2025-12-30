@@ -30,41 +30,64 @@
 </head>
 <body>
 
+  <div class="banner">
+    <img src="assets/images/header.jpg" alt="Taiyaki banner" />
+  </div>
+
   <div class="container">
     <header class="header-wrapper">
-      <button id="theme-toggle" class="theme-toggle" aria-label="テーマ切替">
-        <span class="theme-icon">🌙</span>
-      </button>
   <img src="assets/images/avatar.jpg" alt="プロフィール画像" class="profile-img">
       <h1>Taiyakidos</h1>
-      <p>リンク集</p>
+      <p class="subtitle">リンク集</p>
     </header>
     
     <main>
-      <ul class="links">
-  <li><a href="https://x.com/Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card twitter"><img class="sns-icon" src="ico/X.png" alt="X"><span class="link-text">X (main)</span></a></li>
-  <li><a href="https://www.instagram.com/taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card instagram"><img class="sns-icon" src="ico/Instagram.png" alt="Instagram"><span class="link-text">Instagram</span></a></li>
-  <li><a href="https://www.youtube.com/@Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card youtube"><img class="sns-icon" src="ico/YouTube.png" alt="YouTube"><span class="link-text">YouTube</span></a></li>
-  <!-- Taiyakidos_best link removed per user request -->
-  <li><a href="https://x.com/Taiyakidos_sub" target="_blank" rel="me noopener noreferrer" class="link-card twitter"><img class="sns-icon" src="ico/X.png" alt="X"><span class="link-text">X (Sub)</span></a></li>
-  <li><a href="https://discord.com/users/813386818644213761" target="_blank" rel="me noopener noreferrer" class="link-card discord"><img class="sns-icon" src="ico/Discord.png" alt="Discord"><span class="link-text">Discord</span></a></li>
-        <li>
-          <a href="https://note.com/taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card note" aria-label="note">
-            <img class="sns-icon" src="ico/note.png" alt="note"><span class="link-text">note</span></a>
-        </li>
-        <li>
-          <a href="https://misskey.io/@Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card misskey" aria-label="Misskey">
-            <img class="sns-icon" src="ico/Misskey.png" alt="Misskey"><span class="link-text">Misskey</span></a>
-        </li>
-  <li><a href="https://www.threads.com/@taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card threads"><img class="sns-icon" src="ico/Threads.png" alt="Threads"><span class="link-text">Threads</span></a></li>
-        <li>
-          <a href="mailto:taiyaki_dos@yahoo.co.jp" class="link-card mail" aria-label="メール"><img class="sns-icon" src="ico/mail.svg" alt="メール"><span class="link-text">メール</span></a>
-        </li>
-      </ul>
+      <div id="link-container">
+        <section class="link-section">
+          <div class="link-grid">
+            <a href="https://x.com/Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card twitter">
+              <img class="sns-icon" src="ico/X.png" alt="X">
+              <span class="link-text">X (main)</span>
+            </a>
+            <a href="https://www.instagram.com/taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card instagram">
+              <img class="sns-icon" src="ico/Instagram.png" alt="Instagram">
+              <span class="link-text">Instagram</span>
+            </a>
+            <a href="https://www.youtube.com/@Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card youtube">
+              <img class="sns-icon" src="ico/YouTube.png" alt="YouTube">
+              <span class="link-text">YouTube</span>
+            </a>
+            <a href="https://x.com/Taiyakidos_sub" target="_blank" rel="me noopener noreferrer" class="link-card twitter">
+              <img class="sns-icon" src="ico/X.png" alt="X">
+              <span class="link-text">X (Sub)</span>
+            </a>
+            <a href="https://discord.com/users/813386818644213761" target="_blank" rel="me noopener noreferrer" class="link-card discord">
+              <img class="sns-icon" src="ico/Discord.png" alt="Discord">
+              <span class="link-text">Discord</span>
+            </a>
+            <a href="https://note.com/taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card note" aria-label="note">
+              <img class="sns-icon" src="ico/note.png" alt="note">
+              <span class="link-text">note</span>
+            </a>
+            <a href="https://misskey.io/@Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card misskey" aria-label="Misskey">
+              <img class="sns-icon" src="ico/Misskey.png" alt="Misskey">
+              <span class="link-text">Misskey</span>
+            </a>
+            <a href="https://www.threads.com/@taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card threads">
+              <img class="sns-icon" src="ico/Threads.png" alt="Threads">
+              <span class="link-text">Threads</span>
+            </a>
+            <a href="mailto:taiyaki_dos@yahoo.co.jp" class="link-card mail" aria-label="メール">
+              <img class="sns-icon" src="ico/mail.svg" alt="メール">
+              <span class="link-text">メール</span>
+            </a>
+          </div>
+        </section>
+      </div>
     </main>
     
     <footer>
-      <p>&copy; 2025 Taiyakidos. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> Taiyakidos. All rights reserved.</p>
     </footer>
   </div>
 

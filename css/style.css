@@ -3,319 +3,187 @@
  * ファビコン表示、インタラクティブ性の改善、ダークモード対応
  */
 
-/* ベーススタイル */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  /* 背景色を温かみのあるグラデーションに変更し、固定 */
-  background: linear-gradient(135deg, #f8e1c1, #d7a67a);
-  background-attachment: fixed; /* 背景を固定 */
-  min-height: 100vh;
+/*
+ * LinkList Styles - 見た目を洗練させる改良
+ * - 余白とフォントの調整
+ * - カードのホバー/リップル強化
+ * - プロフィール周りの整列
+ */
+
+/* ベース */
+:root{
+  --container-max: clamp(320px, 40vw, 760px);
+  --container-pad: clamp(16px, 4vw, 40px);
+  --radius: 18px;
+  --card-gap: 14px;
+  --link-min-height: 56px;
+  --muted: #6b7280;
 }
 
-:root{
-  --container-max: clamp(320px, 40vw, 720px);
-  --container-pad: clamp(16px, 4vw, 40px);
-  --radius: 16px;
-  --card-gap: 12px;
-  --link-min-height: 52px; /* タッチターゲット確保 */
+html,body{height:100%;}
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, #e8f4f8 0%, #d4e8f0 25%, #c0dce8 60%, #b5d4e0 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height: 100vh;
+  color: #222;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Decorative background blobs and subtle overlay */
+body::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: -8%;
+  width: 1000px;
+  height: 700px;
+  transform: translateX(-40%);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(200,100,150,0.14), transparent 22%),
+    radial-gradient(circle at 80% 70%, rgba(50,130,200,0.12), transparent 26%);
+  filter: blur(84px) saturate(1.05);
+  z-index: 0;
+  pointer-events: none;
+  animation: blob-slow 18s linear infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.02) 100%);
+  mix-blend-mode: overlay;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes blob-slow {
+  0% { transform: translateX(-40%) translateY(0) scale(1); }
+  50% { transform: translateX(-45%) translateY(20px) scale(1.03); }
+  100% { transform: translateX(-40%) translateY(0) scale(1); }
+}
+
+/* バナー */
+.banner {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: clamp(140px, 20vw, 280px);
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* コンテナ */
 .container {
-  background: #fff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), #ffffff);
   border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
   max-width: var(--container-max);
-  margin: min(12vh, 80px) auto; /* 上部マージンを画面高さに応じて調整 */
+  margin: min(6vh, 48px) auto;
   padding: var(--container-pad);
   text-align: center;
   padding-left: calc(var(--container-pad) + env(safe-area-inset-left));
   padding-right: calc(var(--container-pad) + env(safe-area-inset-right));
+  transition: transform 0.28s ease;
+  position: relative;
+  z-index: 2;
 }
 
 /* ヘッダー */
-header {
-  margin-bottom: 24px;
+.header-wrapper {
+  position: relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
 }
-header .profile-img {
-  width: clamp(72px, 12vw, 120px);
-  height: clamp(72px, 12vw, 120px);
-  border: 3px solid #87ceeb;
+.profile-img {
+  width: clamp(76px, 12vw, 120px);
+  height: clamp(76px, 12vw, 120px);
   border-radius: 50%;
-  margin-bottom: 12px;
+  border: 3px solid rgba(135,206,235,0.18);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  object-fit: cover;
+  transition: transform 0.28s cubic-bezier(.2,.9,.3,1), box-shadow 0.2s;
 }
-header h1 {
-  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-  margin: 6px 0;
-  color: #333;
-}
-header p {
-  margin: 0;
-  color: #666;
-  font-size: clamp(0.88rem, 2vw, 1rem);
-  margin-bottom: 18px;
-}
+.profile-img:hover{ transform: translateY(-4px) scale(1.02); }
+.header-wrapper h1{ font-size: clamp(1.4rem, 3.6vw, 2.1rem); margin:6px 0; color:#111; }
+.header-wrapper p{ margin:0; color:var(--muted); font-size:0.98rem; }
 
-/* リンクセクション（LinkListではカテゴリ） */
-.link-section {
-  /* カテゴリラッパー（必要に応じてアニメーション等を追加） */
-  display: block;
+/* リスト */
+.links{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; align-items:stretch; }
+
+/* リンクカード */
+.link-card{
+  position:relative; display:flex; align-items:center; gap:var(--card-gap);
+  width:100%; box-sizing:border-box; color:#fff; padding:12px 14px; border-radius:12px;
+  transition: transform 240ms cubic-bezier(.2,.9,.3,1), box-shadow 240ms, filter 200ms;
+  min-height:var(--link-min-height); text-decoration:none; cursor:pointer; overflow:hidden;
+  justify-content:flex-start; text-align:left; font-weight:700;
 }
+.link-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,24,40,0.12); }
+.link-card:active{ transform: translateY(-2px) scale(0.997); }
 
-/* リンクカードのリスト */
-.links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left; /* リスト内の配置を左揃えに戻す */
-}
+.link-card .sns-icon{ width:40px; height:40px; border-radius:10px; object-fit:contain; background:rgba(255,255,255,0.12); padding:6px; flex-shrink:0; }
+.link-card .link-text{ font-weight:700; color:inherit; margin-left:6px; }
+.link-card .link-text, .link-card .sns-icon{ display:inline-flex; align-items:center; }
 
-/* リンクカード本体 */
-.link-card {
-  position: relative; /* ripple 要素を相対配置 */
-  display: flex;
-  align-items: center;
-  gap: var(--card-gap);
-  width: 100%;
-  box-sizing: border-box;
-  background: #87ceeb;
-  color: #fff;
-  font-size: clamp(0.98rem, 2.5vw, 1.05rem);
-  font-weight: 700;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  border-radius: calc(var(--radius) - 4px);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
-  overflow: hidden;
-  min-height: var(--link-min-height);
-  cursor: pointer;
-}
+/* テキスト折り返し対策 */
+.link-card .link-name, .link-card .link-text{ overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 
-/* リンクカードのホバー/クリックエフェクト強化 */
-.link-card:hover {
-  transform: scale(0.995); /* ホバーでわずかに縮小 */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
+/* カード色 */
+.link-card.twitter { background: linear-gradient(90deg,#1da1f2,#0d8ae8); }
+.link-card.instagram { background: linear-gradient(90deg,#feda75,#fd1d1d); }
+.link-card.youtube { background: linear-gradient(90deg,#ff5f6d,#ff4a3d); }
+.link-card.discord { background: linear-gradient(90deg,#7289da,#5b6fb0); }
+.link-card.note { background: linear-gradient(90deg,#00c300,#00a000); }
+.link-card.misskey { background: linear-gradient(90deg,#ffd54a,#ffb300); color:#222; }
+.link-card.threads { background: linear-gradient(90deg,#111,#333); }
+.link-card.mail { background: linear-gradient(90deg,#6a9cff,#4677ff); }
 
-.link-card:active {
-  transform: scale(0.985); /* クリック時にさらに縮小し、押下感を出す */
-}
+/* 削除ボタン */
+.delete-btn{ background:none; border:none; color:inherit; font-size:0.95rem; cursor:pointer; margin-left:auto; opacity:0.85; }
+.delete-btn:hover{ opacity:1; }
 
-/* リンクエリア (ファビコンとテキストを内包) */
-.link-card {
-  display: flex;
-  align-items: center; /* 垂直方向の中央揃え */
-  gap: var(--card-gap); /* ファビコンとテキストの間隔 */
-  text-decoration: none;
-  color: inherit;
-  box-sizing: border-box;
-}
-
-/* リンクテキスト */
-.link-card .link-name {
-    flex-grow: 1;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* 長すぎるテキストを省略 */
-}
-
-/* ★ ファビコン画像スタイル ★ */
-.link-card .favicon-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;    /* 縮小しないように設定 */
-    border-radius: 4px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
-}
-
-/* リンクカード内のSVGアイコン対応 */
-.link-card svg {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-.icon-note { color: #fff; }
-.icon-misskey { color: #333; }
-
-
-/* 削除ボタンのスタイル調整 */
-.link-card .delete-btn {
-    background: none;
-    border: none;
-    color: inherit;
-    font-size: 1rem;
-    padding: 0;
-    margin-left: 10px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    flex-shrink: 0;
-}
-.link-card .delete-btn:hover {
-    opacity: 1;
-}
-
-
-/* キーボード操作向けフォーカス */
-.link-card:focus-visible {
-  outline: 3px solid rgba(70,119,255,0.18);
-  outline-offset: 4px;
-}
-
-/* SNSごとの色 */
-.link-card.twitter { background: #1da1f2; }
-.link-card.instagram { background: #fdc468; }
-.link-card.youtube { background: #ff5f6d; }
-.link-card.discord { background: #7289da; }
-.link-card.note { background: #00c300; }
-.link-card.misskey { background: #ffd700; color: #333; }
-.link-card.threads { background: #000; color: #fff; }
-.link-card.mail { background: linear-gradient(90deg, #6a9cff, #4677ff); }
+/* ripple */
+.link-card > span.ripple{ position:absolute; border-radius:50%; transform:scale(0); pointer-events:none; }
 
 /* フッター */
-footer {
-  margin-top: 32px;
-  color: #aaa;
-  font-size: 0.95rem;
-}
-
-/* ripple 用のスタイル */
-.link-card > span.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  pointer-events: none;
-}
+footer{ margin-top:20px; color:#9aa0aa; font-size:0.95rem; }
 
 /* レスポンシブ */
-@media (max-width: 600px) {
-  .container {
-    padding: 16px;
-    max-width: 98vw;
-  }
-  .link-card {
-    padding: 0 12px;
-    font-size: 1rem;
-    gap: 8px;
-    min-height: 56px;
-  }
-  .link-card a {
-    padding: 12px 0;
-  }
-}
+@media (max-width:600px){ .container{ padding:18px; max-width:98vw; margin-top:6vh;} .link-card{ padding:12px; min-height:60px; } .theme-toggle{ right:12px; top:12px; } }
 
-/* タブレット〜デスクトップの中間調整 */
-@media (min-width: 601px) and (max-width: 1000px) {
-  .container { padding: clamp(20px, 4vw, 36px); }
-  .link-card { font-size: clamp(1rem, 1.8vw, 1.04rem); }
+/* ダークモード */
+body.dark-mode{ background: linear-gradient(180deg, #0d2635 0%, #0f3847 30%, #0f4855 70%, #0a3a48 100%); color:#e6eef8; }
+body.dark-mode .container{ background:#0f1724; box-shadow:0 8px 30px rgba(2,6,23,0.6); }
+body.dark-mode .profile-img{ border-color: rgba(255,255,255,0.06); }
+body.dark-mode .header-wrapper h1{ color: #e6eef8; }
+body.dark-mode .header-wrapper p{ color: #cfd8e3; }
+body.dark-mode::before{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(120,90,200,0.12), transparent 22%),
+    radial-gradient(circle at 80% 70%, rgba(50,140,220,0.10), transparent 26%);
+  filter: blur(84px) hue-rotate(-10deg) saturate(1.08);
 }
+body.dark-mode::after{ background-image: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.06) 100%); mix-blend-mode: screen; }
 
-/* 大きいスクリーン調整 */
-@media (min-width: 1001px) {
-  .container { margin-top: 8vh; }
-  .link-card { font-size: 1.05rem; }
-}
+@media (prefers-color-scheme: dark){ body{ background: linear-gradient(180deg,#0f1724,#0b1220); } }
 
+/* アクセシビリティ */
+.link-card:focus-visible{ outline:3px solid rgba(59,130,246,0.14); outline-offset:4px; }
 
-/* アイコンの微調整 */
-.link-card i {
-  font-size: 1.1em;
-  width: 1.25em;
-  text-align: center;
-  vertical-align: -0.125em;
-}
+/* リンクグリッドに使われる場合の小さなスタイル */
+.link-grid{ display:flex; flex-direction:column; gap:12px; }
 
-/* SNS画像アイコン */
-.sns-icon {
-  width: 1.25em;
-  height: 1.25em;
-  margin-right: 0.5em;
-  vertical-align: -0.15em;
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-/* ラベルのスタイル（アイコンの隣に表示） */
-.link-text {
-  display: inline-block;
-  font-weight: 700;
-  color: inherit;
-}
-
-/* 明示的に左詰めでアイコンとテキストを並べる */
-.link-card {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-/* テーマ切替ボタン */
-.theme-toggle {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: inherit;
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  font-weight: 600;
-}
-
-.header-wrapper { position: relative; }
-
-/* ダークモード (手動切替用) */
-body.dark-mode {
-  background: #2c3e50;
-}
-body.dark-mode .container {
-  background: #2a2a2a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-body.dark-mode header h1,
-body.dark-mode header p {
-  color: #eee;
-}
-body.dark-mode .link-card { color: #fff; }
-body.dark-mode .link-card.twitter { background: #1a91da; }
-body.dark-mode .link-card.instagram { background: #faa14f; }
-body.dark-mode .link-card.youtube { background: #e04a57; }
-body.dark-mode .link-card.discord { background: #5d78a8; }
-body.dark-mode .link-card.note { background: #009b00; }
-body.dark-mode .link-card.misskey { background: #e5c900; color: #333; }
-body.dark-mode .link-card.threads { background: #111; color: #ddd; }
-body.dark-mode footer { color: #777; }
-
-/* ダークモードの自動化 (システム設定と連動) */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #2c3e50;
-    background-attachment: fixed;
-  }
-  header .profile-img { border-color: #5d78a8; }
-  .container { background: #2a2a2a; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-  header h1, header p { color: #eee; }
-  .link-card { color: #fff; }
-  .link-card.twitter { background: #1a91da; }
-  .link-card.instagram { background: #faa14f; }
-  .link-card.youtube { background: #e04a57; }
-  .link-card.discord { background: #5d78a8; }
-  .link-card.note { background: #009b00; }
-  .link-card.misskey { background: #e5c900; color: #333; }
-  .link-card.threads { background: #111; color: #ddd; }
-  footer { color: #777; }
-}
-
-/* フォーカスとアクセシビリティ改善 */
-.theme-toggle:focus-visible,
-.link-card:focus-visible {
-  box-shadow: 0 0 0 4px rgba(100,150,255,0.12);
-}

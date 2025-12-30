@@ -67,51 +67,45 @@ function renderLinkList() {
     const links = getLinks();
     const container = document.getElementById('link-container'); // HTML側のリンク表示コンテナID
     if (!container) return;
-    
-    // リンクをカテゴリごとにグループ化
+    // If no stored links, keep existing static DOM and apply interactive features
+    if (!links || links.length === 0) {
+        // Apply interactive features to existing .link-card elements inside container
+        container.querySelectorAll('.link-card').forEach(el => applyInteractiveFeatures(el));
+        return;
+    }
+
+    // リンクをカテゴリごとにグループ化して動的に生成
     const categorizedLinks = links.reduce((acc, link) => {
         const category = link.category || '未分類';
-        if (!acc[category]) {
-            acc[category] = [];
-        }
+        if (!acc[category]) acc[category] = [];
         acc[category].push(link);
         return acc;
     }, {});
 
     container.innerHTML = '';
-
     for (const category in categorizedLinks) {
         const section = document.createElement('section');
         section.className = 'link-section';
         section.innerHTML = `<h2>${category}</h2><div class="link-grid"></div>`;
         const grid = section.querySelector('.link-grid');
-        
+
         categorizedLinks[category].forEach(link => {
             const linkCard = document.createElement('div');
             linkCard.className = 'link-card';
             linkCard.setAttribute('data-link-id', link.id);
 
-            // ★ ファビコンを表示するHTMLを生成
             linkCard.innerHTML = `
                 <a href="${link.url}" target="_blank" rel="noopener noreferrer">
-                    <img 
-                        src="${link.favicon}" 
-                        alt="${link.name}のファビコン" 
-                        class="favicon-icon"
-                        // 画像読み込み失敗時（ファビコンがない場合など）に代替アイコンを表示
-                        onerror="this.onerror=null; this.src='images/default_link_icon.svg';" 
-                    />
+                    <img src="${link.favicon}" alt="${link.name}のファビコン" class="favicon-icon" onerror="this.onerror=null; this.src='images/default_link_icon.svg';" />
                     <span class="link-name">${link.name}</span>
                 </a>
                 <button class="delete-btn">削除</button>
             `;
+
             grid.appendChild(linkCard);
-            
-            // TODO: ここでリンクカードにインタラクティブ機能を再適用する
             applyInteractiveFeatures(linkCard);
-            
         });
-        
+
         container.appendChild(section);
     }
 }
@@ -181,6 +175,12 @@ function applyInteractiveFeatures(card) {
 
 document.addEventListener('DOMContentLoaded', function() {
   
+  // 年号を自動更新
+  const yearElement = document.getElementById('year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
   // 1. ページ読み込み時のアニメーション (既存コード)
   const linkSections = document.querySelectorAll('.link-section');
   const title = document.querySelector('h1');
@@ -215,13 +215,13 @@ document.addEventListener('DOMContentLoaded', function() {
   style.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
   document.head.appendChild(style);
 
-  // リンクカード全体ではなく、renderLinkList()で個別に適用するように変更
-  // document.querySelectorAll('.link-card').forEach(applyInteractiveFeatures);
-
   
   // 2. リンク管理機能の初期化
   checkAndFixLinks(); // 既存リンクのファビコンをチェック
-  renderLinkList();   // リンク一覧の表示
+    renderLinkList();   // リンク一覧の表示
+
+    // Also apply interactive features to any pre-existing static .link-card elements
+    document.querySelectorAll('#link-container .link-card').forEach(el => applyInteractiveFeatures(el));
 
   // 3. スクロールアニメーションの準備
   let ticking = false;
