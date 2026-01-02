@@ -225,3 +225,12 @@ body.dark-mode::after{ background-image: linear-gradient(135deg, rgba(255,255,25
 
 /* リンクグリッドに使われる場合の小さなスタイル */
 .link-grid{ display:flex; flex-direction:column; gap:12px; }
+/* バナー全体を非表示にする */
+.banner {
+    display: none !important;
+}
+
+/* バナーを消したことで浮いてしまったコンテナの位置を微調整する場合 */
+.container {
+    margin-top: 40px; 
+}
