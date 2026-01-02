@@ -36,6 +36,9 @@ function generateFaviconUrl(url) {
     return `${FAVICON_BASE_URL}${url}&sz=${ICON_SIZE}`;
 }
 
+/** デフォルトアイコンのパス */
+const DEFAULT_ICON_PATH = 'ico/mail.svg';
+
 // --- [リンク管理ロジック] ----------------------------------
 
 /**
@@ -90,16 +93,17 @@ function renderLinkList() {
         const grid = section.querySelector('.link-grid');
 
         categorizedLinks[category].forEach(link => {
-            const linkCard = document.createElement('div');
+            // 静的HTMLと同じ構造（aタグがlink-card）で生成
+            const linkCard = document.createElement('a');
             linkCard.className = 'link-card';
+            linkCard.href = link.url;
+            linkCard.target = '_blank';
+            linkCard.rel = 'noopener noreferrer';
             linkCard.setAttribute('data-link-id', link.id);
 
             linkCard.innerHTML = `
-                <a href="${link.url}" target="_blank" rel="noopener noreferrer">
-                    <img src="${link.favicon}" alt="${link.name}のファビコン" class="favicon-icon" onerror="this.onerror=null; this.src='images/default_link_icon.svg';" />
-                    <span class="link-name">${link.name}</span>
-                </a>
-                <button class="delete-btn">削除</button>
+                <img src="${link.favicon}" alt="${link.name}のアイコン" class="sns-icon" onerror="this.onerror=null; this.src='${DEFAULT_ICON_PATH}';" />
+                <span class="link-text">${link.name}</span>
             `;
 
             grid.appendChild(linkCard);
@@ -144,6 +148,10 @@ function addNewLink(name, url, category) {
  * @param {HTMLElement} card - リンクカード要素
  */
 function applyInteractiveFeatures(card) {
+    // 既に適用済みの場合はスキップ（重複適用を防ぐ）
+    if (card.dataset.interactiveApplied) return;
+    card.dataset.interactiveApplied = 'true';
+
     // ホバー効果
     card.addEventListener('mouseenter', () => card.style.boxShadow = '0 8px 18px rgba(0,0,0,0.12)');
     card.addEventListener('mouseleave', () => card.style.boxShadow = '');
