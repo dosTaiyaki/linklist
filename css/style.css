@@ -1,27 +1,29 @@
 /*
- * LinkList Styles - リットリンク風デザイン
- * ファビコン表示、インタラクティブ性の改善、ダークモード対応
+ * LinkList Styles - デザインリファイン版
+ * - カラーパレット刷新
+ * - グラスモーフィズム強化
+ * - アニメーション背景
  */
 
-/*
- * LinkList Styles - 見た目を洗練させる改良
- * - 余白とフォントの調整
- * - カードのホバー/リップル強化
- * - プロフィール周りの整列
- */
-
-/* ベース */
+/* ベース変数 - モダンカラーパレット */
 :root {
   --container-max: clamp(320px, 40vw, 760px);
-  --container-pad: clamp(16px, 4vw, 40px);
-  --radius: 18px;
-  --card-gap: 14px;
-  --link-min-height: 56px;
-  --muted: #5f6b73;
-  --accent: #5cc0e6;
-  --accent-dark: #128fb6;
-  --peach: #f3dccb;
-  --sky: #eaf9fd;
+  --container-pad: clamp(24px, 5vw, 48px);
+  --radius: 24px;
+  --card-gap: 16px;
+  --link-min-height: 64px;
+
+  /* Modern Colors */
+  --text-main: #2d3748;
+  --text-muted: #718096;
+  --bg-gradient-start: #fdfbfb;
+  --bg-gradient-end: #ebedee;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: 20px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 html,
@@ -31,56 +33,45 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg, var(--peach) 0%, #f7eef0 12%, var(--sky) 50%, #e6f6fb 100%);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f0f4f8;
+  color: var(--text-main);
   min-height: 100vh;
-  color: #222;
   position: relative;
   overflow-x: hidden;
-}
 
-/* Decorative background blobs and subtle overlay */
-body::before {
-  content: "";
-  position: fixed;
-  left: 50%;
-  top: -8%;
-  width: 1200px;
-  height: 700px;
-  transform: translateX(-50%);
+  /* Animated Mesh Gradient Background */
   background:
-    radial-gradient(circle at 18% 28%, rgba(244, 209, 195, 0.9), transparent 18%),
-    radial-gradient(circle at 82% 72%, rgba(150, 220, 240, 0.12), transparent 26%);
-  filter: blur(84px) saturate(1.02);
-  z-index: 0;
-  pointer-events: none;
-  animation: blob-slow 18s linear infinite;
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+  background:
+    radial-gradient(at 40% 20%, rgba(255, 220, 210, 0.8) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(200, 240, 255, 0.8) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(255, 240, 245, 0.8) 0px, transparent 50%);
+  background-size: 150% 150%;
+  animation: bg-shift 20s ease-in-out infinite alternate;
 }
 
+@keyframes bg-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Subtle Overlay Texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.02) 100%);
-  mix-blend-mode: overlay;
-  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
-}
-
-@keyframes blob-slow {
-  0% {
-    transform: translateX(-40%) translateY(0) scale(1);
-  }
-
-  50% {
-    transform: translateX(-45%) translateY(20px) scale(1.03);
-  }
-
-  100% {
-    transform: translateX(-40%) translateY(0) scale(1);
-  }
+  z-index: 100;
+  mix-blend-mode: overlay;
 }
 
 /* バナー */
@@ -88,7 +79,6 @@ body::after {
   position: relative;
   width: 100%;
   height: auto;
-  /* Let image define height so nothing is cropped */
   z-index: 1;
 }
 
@@ -98,20 +88,17 @@ body::after {
   display: block;
 }
 
-/* Gradient overlay removed to ensure clear visibility of QR code */
-
 /* コンテナ (グラスモーフィズム) */
 .container {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--glass-shadow);
 
   max-width: var(--container-max);
-  margin: 20px auto 40px;
-  /* Positive margin, no overlap */
+  margin: 40px auto 60px;
   padding: var(--container-pad);
   text-align: center;
   position: relative;
@@ -124,51 +111,46 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .profile-img {
-  width: clamp(90px, 14vw, 130px);
-  height: clamp(90px, 14vw, 130px);
+  width: clamp(100px, 16vw, 140px);
+  height: clamp(100px, 16vw, 140px);
   border-radius: 50%;
-  border: 4px solid #fff;
-  /* White border blends with glass container */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   object-fit: cover;
-  transition: transform 0.3s cubic-bezier(.175, .885, .32, 1.275);
-  margin-top: -60px;
-  /* Pull profile up further to overlap edge */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: -80px;
   background: #fff;
 }
 
 .profile-img:hover {
-  transform: scale(1.08) rotate(2deg);
+  transform: scale(1.05) rotate(3deg);
 }
 
 .header-wrapper h1 {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
   margin: 8px 0 4px;
-  color: #111;
+  color: var(--text-main);
   letter-spacing: -0.02em;
+  font-weight: 800;
 }
 
 .header-wrapper p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 1rem;
   font-weight: 500;
 }
 
-/* リスト */
-.links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* リンクグリッド */
+.link-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  align-items: stretch;
+  gap: var(--card-gap);
 }
 
 /* リンクカード */
@@ -180,9 +162,9 @@ body::after {
   width: 100%;
   box-sizing: border-box;
   color: #fff;
-  padding: 14px 18px;
-  border-radius: 16px;
-  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  padding: 16px 20px;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   min-height: var(--link-min-height);
   text-decoration: none;
   cursor: pointer;
@@ -190,12 +172,14 @@ body::after {
   justify-content: flex-start;
   text-align: left;
   font-weight: 700;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Softer shadow */
 }
 
 .link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+  /* Richer shadow on hover */
 }
 
 .link-card:active {
@@ -203,30 +187,29 @@ body::after {
 }
 
 .link-card .sns-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 7px;
   flex-shrink: 0;
   backdrop-filter: blur(4px);
+  transition: transform 0.3s ease;
+}
+
+.link-card:hover .sns-icon {
+  transform: rotate(-5deg) scale(1.1);
 }
 
 .link-card .link-text {
   font-weight: 700;
   color: inherit;
-  margin-left: 6px;
-  font-size: 1.05rem;
+  margin-left: 2px;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
 }
 
-.link-card .link-text,
-.link-card .sns-icon {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* テキスト折り返し対策 */
 .link-card .link-name,
 .link-card .link-text {
   overflow: hidden;
@@ -234,41 +217,40 @@ body::after {
   text-overflow: ellipsis;
 }
 
-/* カード色 */
+/* カード色 - 少し彩度を調整 */
 .link-card.twitter {
-  background: linear-gradient(100deg, #1da1f2, #009ffc);
+  background: linear-gradient(135deg, #1da1f2, #009ffc);
 }
 
 .link-card.instagram {
-  background: linear-gradient(100deg, #833ab4, #fd1d1d, #fcb045);
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
 }
 
 .link-card.youtube {
-  background: linear-gradient(100deg, #ff0000, #e60000);
+  background: linear-gradient(135deg, #ff0000, #c40000);
 }
 
 .link-card.discord {
-  background: linear-gradient(100deg, #5865F2, #4752c4);
+  background: linear-gradient(135deg, #5865F2, #4752c4);
 }
 
 .link-card.note {
-  background: linear-gradient(100deg, #2c3fb1, #2c3fb1);
-  /* Note brand color */
+  background: linear-gradient(135deg, #41c9b4, #2c3fb1);
+  /* Noteっぽいグリーン〜ネイビーへ */
 }
 
 .link-card.misskey {
-  background: linear-gradient(100deg, #98ce00, #7bb000);
+  background: linear-gradient(135deg, #98ce00, #7bb000);
 }
 
 .link-card.threads {
-  background: linear-gradient(100deg, #000000, #1a1a1a);
+  background: linear-gradient(135deg, #111, #333);
 }
 
 .link-card.mail {
-  background: linear-gradient(100deg, #778899, #5f6f7f);
+  background: linear-gradient(135deg, #718096, #4a5568);
 }
 
-/* 削除ボタン - 削除済みのため CSSも整理 */
 /* ripple */
 .link-card>span.ripple {
   position: absolute;
@@ -279,13 +261,14 @@ body::after {
 
 /* フッター */
 footer {
-  margin-top: 30px;
-  color: #666;
-  font-size: 0.9rem;
-  opacity: 0.8;
+  margin-top: 40px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  opacity: 0.9;
+  letter-spacing: 0.05em;
 }
 
-/* レスポンシブ */
+/* レスポンシブ - モバイルバナー対応含む */
 @media (max-width:600px) {
   .banner {
     height: 200px;
@@ -298,54 +281,44 @@ footer {
 
   .container {
     margin-top: -60px;
-    padding: 24px 16px;
-    width: 92%;
+    padding: 32px 20px;
+    width: 90%;
   }
 
   .profile-img {
-    margin-top: -45px;
+    margin-top: -60px;
   }
 }
 
 /* ダークモード */
-body.dark-mode {
-  background: #111;
-  color: #eee;
-}
-
-body.dark-mode .container {
-  background: rgba(30, 30, 30, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .profile-img {
-  border-color: #2a2a2a;
-  background: #2a2a2a;
-}
-
-body.dark-mode .header-wrapper h1 {
-  color: #fff;
-}
-
-body.dark-mode .header-wrapper p {
-  color: #aaa;
-}
-
-/* システムのダークモード設定に自動対応 */
 @media (prefers-color-scheme: dark) {
+  :root {
+    --text-main: #f7fafc;
+    --text-muted: #a0aec0;
+    --glass-bg: rgba(26, 32, 44, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
   body:not(.light-mode) {
-    background: #111;
-    color: #eee;
+    background: #1a202c;
+    background:
+      radial-gradient(at 0% 0%, hsla(253, 16%, 17%, 1) 0, transparent 50%),
+      radial-gradient(at 50% 100%, hsla(225, 39%, 20%, 1) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(339, 49%, 20%, 1) 0, transparent 50%);
+    background-size: 150% 150%;
+    animation: bg-shift 25s ease-in-out infinite alternate;
+    color: var(--text-main);
   }
 
   body:not(.light-mode) .container {
-    background: rgba(30, 30, 30, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
   }
 
   body:not(.light-mode) .profile-img {
-    border-color: #2a2a2a;
-    background: #2a2a2a;
+    border-color: #2d3748;
+    background: #2d3748;
   }
 
   body:not(.light-mode) .header-wrapper h1 {
@@ -353,20 +326,29 @@ body.dark-mode .header-wrapper p {
   }
 
   body:not(.light-mode) .header-wrapper p {
-    color: #aaa;
+    color: var(--text-muted);
   }
+}
+
+/* 手動ダークモード切り替えクラス用 (JSでの実装を見越して) */
+body.dark-mode {
+  /* 上記の@media prefers-color-scheme と同様の変数を適用するような設計が望ましいが
+     ここでは簡易的に上書き対応 */
+  background: #1a202c;
+  color: #fff;
+}
+
+body.dark-mode .container {
+  background: rgba(26, 32, 44, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .header-wrapper p {
+  color: #cbd5e0;
 }
 
 /* アクセシビリティ */
 .link-card:focus-visible {
-  outline: 3px solid rgba(59, 130, 246, 0.6);
-  outline-offset: 2px;
+  outline: 3px solid rgba(66, 153, 225, 0.6);
+  outline-offset: 4px;
 }
-
-/* リンクグリッド */
-.link-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-/* Force update for mobile banner object-fit */
