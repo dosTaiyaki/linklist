@@ -1,145 +1,6 @@
 // =========================================================
-//  LinkList Main Script (インタラクティブ機能 + リンク管理)
+//  LinkList Main Script (インタラクティブ機能のみ)
 // =========================================================
-
-// --- [定数とヘルパー関数] ---------------------------------
-const FAVICON_BASE_URL = 'https://www.google.com/s2/favicons?domain=';
-const ICON_SIZE = 32;
-const STORAGE_KEY = 'linklist_data';
-
-/** LocalStorageからリンクデータを取得 */
-function getLinks() {
-    try {
-        const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
-    } catch (e) {
-        console.error("Failed to load links from localStorage:", e);
-        return [];
-    }
-}
-
-/** LocalStorageにリンクデータを保存 */
-function saveLinks(links) {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(links));
-    } catch (e) {
-        console.error("Failed to save links to localStorage:", e);
-    }
-}
-
-/**
- * URLからファビコンURLを生成
- * @param {string} url - リンクのURL
- * @returns {string} ファビコン画像のURL
- */
-function generateFaviconUrl(url) {
-    return `${FAVICON_BASE_URL}${url}&sz=${ICON_SIZE}`;
-}
-
-/** デフォルトアイコンのパス */
-const DEFAULT_ICON_PATH = 'ico/mail.svg';
-
-// --- [リンク管理ロジック] ----------------------------------
-
-/**
- * アプリケーション起動時に既存リンクのファビコンURLをチェックし補完
- */
-function checkAndFixLinks() {
-    let links = getLinks();
-    let updated = false;
-
-    links = links.map(link => {
-        // 既存のリンクにfaviconフィールドがない場合、新たに生成して補完
-        if (!link.favicon) {
-            link.favicon = generateFaviconUrl(link.url);
-            updated = true;
-        }
-        return link;
-    });
-
-    if (updated) {
-        saveLinks(links);
-    }
-}
-
-
-/**
- * リンクデータからHTML要素を生成して表示
- */
-function renderLinkList() {
-    const links = getLinks();
-    const container = document.getElementById('link-container'); // HTML側のリンク表示コンテナID
-    if (!container) return;
-    // If no stored links, keep existing static DOM and apply interactive features
-    if (!links || links.length === 0) {
-        // Apply interactive features to existing .link-card elements inside container
-        container.querySelectorAll('.link-card').forEach(el => applyInteractiveFeatures(el));
-        return;
-    }
-
-    // リンクをカテゴリごとにグループ化して動的に生成
-    const categorizedLinks = links.reduce((acc, link) => {
-        const category = link.category || '未分類';
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(link);
-        return acc;
-    }, {});
-
-    container.innerHTML = '';
-    for (const category in categorizedLinks) {
-        const section = document.createElement('section');
-        section.className = 'link-section';
-        section.innerHTML = `<h2>${category}</h2><div class="link-grid"></div>`;
-        const grid = section.querySelector('.link-grid');
-
-        categorizedLinks[category].forEach(link => {
-            // 静的HTMLと同じ構造（aタグがlink-card）で生成
-            const linkCard = document.createElement('a');
-            linkCard.className = 'link-card';
-            linkCard.href = link.url;
-            linkCard.target = '_blank';
-            linkCard.rel = 'noopener noreferrer';
-            linkCard.setAttribute('data-link-id', link.id);
-
-            linkCard.innerHTML = `
-                <img src="${link.favicon}" alt="${link.name}のアイコン" class="sns-icon" onerror="this.onerror=null; this.src='${DEFAULT_ICON_PATH}';" />
-                <span class="link-text">${link.name}</span>
-            `;
-
-            grid.appendChild(linkCard);
-            applyInteractiveFeatures(linkCard);
-        });
-
-        container.appendChild(section);
-    }
-}
-
-/**
- * 新しいリンクを追加 (フォーム送信イベントから呼び出されることを想定)
- * @param {string} name - リンク名
- * @param {string} url - リンクURL
- * @param {string} category - カテゴリ名
- */
-function addNewLink(name, url, category) {
-    if (!url.startsWith('http')) {
-        url = 'https://' + url; // プロトコルがない場合はhttps://を補完
-    }
-    
-    const links = getLinks();
-    const newLink = {
-        id: Date.now(),
-        name: name,
-        url: url,
-        category: category,
-        favicon: generateFaviconUrl(url) // ★ リンク追加時にファビコンURLを生成し保存
-    };
-    
-    links.push(newLink);
-    saveLinks(links);
-    renderLinkList(); // リストを再描画
-}
-
-// TODO: 削除機能、編集機能などのロジックをここに追加
 
 // --- [インタラクティブ機能] ----------------------------------
 
@@ -189,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     yearElement.textContent = new Date().getFullYear();
   }
 
-  // 1. ページ読み込み時のアニメーション (既存コード)
+  // 1. ページ読み込み時のアニメーション
   const linkSections = document.querySelectorAll('.link-section');
   const title = document.querySelector('h1');
   const subtitle = document.querySelector('.subtitle');
@@ -212,24 +73,19 @@ document.addEventListener('DOMContentLoaded', function() {
     subtitle.style.opacity = '0';
     subtitle.style.transform = 'translateY(20px)';
     setTimeout(() => {
-      subtitle.style.transition = 'all 0.8s ease';
+      title.style.transition = 'all 0.8s ease';
       subtitle.style.opacity = '1';
       subtitle.style.transform = 'translateY(0)';
     }, 500);
   }
 
-  // リップルアニメーションのCSSを動的に追加 (既存コード)
+  // リップルアニメーションのCSSを動的に追加
   const style = document.createElement('style');
   style.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
   document.head.appendChild(style);
 
-  
-  // 2. リンク管理機能の初期化
-  checkAndFixLinks(); // 既存リンクのファビコンをチェック
-    renderLinkList();   // リンク一覧の表示
-
-    // Also apply interactive features to any pre-existing static .link-card elements
-    document.querySelectorAll('#link-container .link-card').forEach(el => applyInteractiveFeatures(el));
+  // 2. インタラクティブ機能の適用
+  document.querySelectorAll('.link-card').forEach(el => applyInteractiveFeatures(el));
 
   // 3. スクロールアニメーションの準備
   let ticking = false;
