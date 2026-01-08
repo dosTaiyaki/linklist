@@ -1,29 +1,40 @@
 /*
- * LinkList Styles - デザインリファイン版
- * - カラーパレット刷新
- * - グラスモーフィズム強化
- * - アニメーション背景
+ * LinkList Styles - Warm Cafe Design
+ * - ヘッダー・アバターに合わせた温かみのある配色
+ * - クリーム系グラスモーフィズム
+ * - やわらかいアニメーション
  */
 
-/* ベース変数 - モダンカラーパレット */
+/* ベース変数 - Warm Color Palette */
 :root {
   --container-max: clamp(320px, 40vw, 760px);
   --container-pad: clamp(24px, 5vw, 48px);
-  --radius: 24px;
-  --card-gap: 16px;
-  --link-min-height: 64px;
+  --radius: 28px;
+  --card-gap: 14px;
+  --link-min-height: 60px;
 
-  /* Modern Colors */
-  --text-main: #2d3748;
-  --text-muted: #718096;
-  --bg-gradient-start: #fdfbfb;
-  --bg-gradient-end: #ebedee;
+  /* Warm Colors */
+  --text-main: #4a3728;
+  --text-muted: #8b7355;
+  --bg-cream: #f5ebe0;
+  --bg-beige: #e8d5c4;
+  --bg-soft-blue: #c9d6df;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-blur: 20px;
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  /* Warm Glassmorphism */
+  --glass-bg: rgba(255, 250, 245, 0.75);
+  --glass-border: rgba(200, 180, 160, 0.4);
+  --glass-blur: 24px;
+  --glass-shadow: 0 12px 40px rgba(120, 90, 60, 0.12);
+
+  /* Card Colors - Muted & Warm */
+  --card-x: linear-gradient(135deg, #6b7b8a 0%, #4a5a6a 100%);
+  --card-instagram: linear-gradient(135deg, #d4a574 0%, #c78b6b 50%, #b87a82 100%);
+  --card-youtube: linear-gradient(135deg, #c75b5b 0%, #a84848 100%);
+  --card-discord: linear-gradient(135deg, #7b89b8 0%, #5a6a9a 100%);
+  --card-note: linear-gradient(135deg, #7ab8a8 0%, #5a9a8a 100%);
+  --card-misskey: linear-gradient(135deg, #a8c87a 0%, #8ab060 100%);
+  --card-threads: linear-gradient(135deg, #6a5a4a 0%, #4a3a2a 100%);
+  --card-mail: linear-gradient(135deg, #9a8a7a 0%, #7a6a5a 100%);
 }
 
 html,
@@ -33,29 +44,30 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #f0f4f8;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--text-main);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 
-  /* Animated Mesh Gradient Background */
+  /* Warm Mesh Gradient Background */
   background:
-    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
-  background:
-    radial-gradient(at 40% 20%, rgba(255, 220, 210, 0.8) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(200, 240, 255, 0.8) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(255, 240, 245, 0.8) 0px, transparent 50%);
-  background-size: 150% 150%;
-  animation: bg-shift 20s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 0% 0%, rgba(201, 214, 223, 0.7) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(232, 213, 196, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(245, 235, 224, 0.9) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(200, 180, 160, 0.4) 0%, transparent 40%);
+  background-color: #f0e6dc;
+  background-size: 200% 200%;
+  animation: warm-shift 25s ease-in-out infinite alternate;
 }
 
-@keyframes bg-shift {
+@keyframes warm-shift {
   0% {
     background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 50% 50%;
   }
 
   100% {
@@ -63,15 +75,15 @@ body {
   }
 }
 
-/* Subtle Overlay Texture */
+/* Subtle Texture Overlay */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 100;
-  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
 }
 
 /* バナー */
@@ -88,12 +100,12 @@ body::after {
   display: block;
 }
 
-/* コンテナ (グラスモーフィズム) */
+/* コンテナ (Warm Glassmorphism) */
 .container {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
+  border: 1.5px solid var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--glass-shadow);
 
@@ -105,45 +117,64 @@ body::after {
   z-index: 2;
 }
 
+/* Decorative elements - like the mockup */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(201, 180, 160, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 90% 80%, rgba(180, 160, 140, 0.1) 0%, transparent 25%);
+  border-radius: calc(var(--radius) + 10px);
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* ヘッダー */
 .header-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 10px;
+  margin-bottom: 28px;
 }
 
 .profile-img {
-  width: clamp(100px, 16vw, 140px);
-  height: clamp(100px, 16vw, 140px);
+  width: clamp(100px, 16vw, 130px);
+  height: clamp(100px, 16vw, 130px);
   border-radius: 50%;
-  border: 4px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 5px solid rgba(255, 252, 248, 0.95);
+  box-shadow:
+    0 8px 24px rgba(100, 70, 40, 0.15),
+    0 2px 8px rgba(100, 70, 40, 0.1);
   object-fit: cover;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  margin-top: -80px;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: -70px;
   background: #fff;
 }
 
 .profile-img:hover {
-  transform: scale(1.05) rotate(3deg);
+  transform: scale(1.06) rotate(2deg);
 }
 
 .header-wrapper h1 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  margin: 8px 0 4px;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  margin: 10px 0 2px;
   color: var(--text-main);
-  letter-spacing: -0.02em;
-  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-weight: 700;
 }
 
 .header-wrapper p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
 /* リンクグリッド */
@@ -158,28 +189,30 @@ body::after {
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--card-gap);
+  gap: 14px;
   width: 100%;
   box-sizing: border-box;
   color: #fff;
-  padding: 16px 20px;
-  border-radius: 20px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 14px 18px;
+  border-radius: 18px;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
   min-height: var(--link-min-height);
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   justify-content: flex-start;
   text-align: left;
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  /* Softer shadow */
+  font-weight: 600;
+  box-shadow:
+    0 4px 12px rgba(100, 80, 60, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .link-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
-  /* Richer shadow on hover */
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    0 12px 28px rgba(100, 80, 60, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .link-card:active {
@@ -187,27 +220,28 @@ body::after {
 }
 
 .link-card .sns-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.25);
-  padding: 7px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px;
   flex-shrink: 0;
   backdrop-filter: blur(4px);
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
 .link-card:hover .sns-icon {
-  transform: rotate(-5deg) scale(1.1);
+  transform: rotate(-4deg) scale(1.08);
 }
 
 .link-card .link-text {
-  font-weight: 700;
+  font-weight: 600;
   color: inherit;
   margin-left: 2px;
-  font-size: 1.1rem;
-  letter-spacing: 0.01em;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .link-card .link-name,
@@ -217,38 +251,37 @@ body::after {
   text-overflow: ellipsis;
 }
 
-/* カード色 - 少し彩度を調整 */
+/* カード色 - Warm & Muted */
 .link-card.twitter {
-  background: linear-gradient(135deg, #1da1f2, #009ffc);
+  background: var(--card-x);
 }
 
 .link-card.instagram {
-  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  background: var(--card-instagram);
 }
 
 .link-card.youtube {
-  background: linear-gradient(135deg, #ff0000, #c40000);
+  background: var(--card-youtube);
 }
 
 .link-card.discord {
-  background: linear-gradient(135deg, #5865F2, #4752c4);
+  background: var(--card-discord);
 }
 
 .link-card.note {
-  background: linear-gradient(135deg, #41c9b4, #2c3fb1);
-  /* Noteっぽいグリーン〜ネイビーへ */
+  background: var(--card-note);
 }
 
 .link-card.misskey {
-  background: linear-gradient(135deg, #98ce00, #7bb000);
+  background: var(--card-misskey);
 }
 
 .link-card.threads {
-  background: linear-gradient(135deg, #111, #333);
+  background: var(--card-threads);
 }
 
 .link-card.mail {
-  background: linear-gradient(135deg, #718096, #4a5568);
+  background: var(--card-mail);
 }
 
 /* ripple */
@@ -261,17 +294,17 @@ body::after {
 
 /* フッター */
 footer {
-  margin-top: 40px;
+  margin-top: 36px;
   color: var(--text-muted);
-  font-size: 0.85rem;
-  opacity: 0.9;
-  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
 }
 
-/* レスポンシブ - モバイルバナー対応含む */
+/* レスポンシブ */
 @media (max-width:600px) {
   .banner {
-    height: 200px;
+    height: 180px;
   }
 
   .banner img {
@@ -280,34 +313,47 @@ footer {
   }
 
   .container {
-    margin-top: -60px;
-    padding: 32px 20px;
-    width: 90%;
+    margin-top: -50px;
+    padding: 28px 18px;
+    width: 92%;
+    border-radius: 24px;
   }
 
   .profile-img {
-    margin-top: -60px;
+    margin-top: -55px;
+    width: 95px;
+    height: 95px;
+  }
+
+  .link-card {
+    padding: 12px 16px;
+    border-radius: 14px;
+  }
+
+  .link-card .sns-icon {
+    width: 36px;
+    height: 36px;
   }
 }
 
 /* ダークモード */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-main: #f7fafc;
-    --text-muted: #a0aec0;
-    --glass-bg: rgba(26, 32, 44, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --text-main: #f5ebe0;
+    --text-muted: #c4b5a5;
+    --glass-bg: rgba(60, 50, 40, 0.8);
+    --glass-border: rgba(120, 100, 80, 0.3);
+    --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   }
 
   body:not(.light-mode) {
-    background: #1a202c;
     background:
-      radial-gradient(at 0% 0%, hsla(253, 16%, 17%, 1) 0, transparent 50%),
-      radial-gradient(at 50% 100%, hsla(225, 39%, 20%, 1) 0, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(339, 49%, 20%, 1) 0, transparent 50%);
-    background-size: 150% 150%;
-    animation: bg-shift 25s ease-in-out infinite alternate;
+      radial-gradient(ellipse at 0% 0%, rgba(80, 70, 60, 0.6) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 0%, rgba(70, 60, 50, 0.7) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(50, 45, 40, 0.8) 0%, transparent 60%);
+    background-color: #2a2420;
+    background-size: 200% 200%;
+    animation: warm-shift 25s ease-in-out infinite alternate;
     color: var(--text-main);
   }
 
@@ -317,38 +363,42 @@ footer {
   }
 
   body:not(.light-mode) .profile-img {
-    border-color: #2d3748;
-    background: #2d3748;
+    border-color: rgba(80, 70, 60, 0.8);
+    background: #3a3028;
   }
 
   body:not(.light-mode) .header-wrapper h1 {
-    color: #fff;
+    color: #f5ebe0;
   }
 
   body:not(.light-mode) .header-wrapper p {
     color: var(--text-muted);
   }
+
+  body:not(.light-mode) .link-card {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
 }
 
-/* 手動ダークモード切り替えクラス用 (JSでの実装を見越して) */
+/* 手動ダークモード切り替え用 */
 body.dark-mode {
-  /* 上記の@media prefers-color-scheme と同様の変数を適用するような設計が望ましいが
-     ここでは簡易的に上書き対応 */
-  background: #1a202c;
-  color: #fff;
+  background: #2a2420;
+  color: #f5ebe0;
 }
 
 body.dark-mode .container {
-  background: rgba(26, 32, 44, 0.8);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(60, 50, 40, 0.85);
+  border-color: rgba(120, 100, 80, 0.3);
 }
 
 body.dark-mode .header-wrapper p {
-  color: #cbd5e0;
+  color: #c4b5a5;
 }
 
 /* アクセシビリティ */
 .link-card:focus-visible {
-  outline: 3px solid rgba(66, 153, 225, 0.6);
+  outline: 3px solid rgba(180, 140, 100, 0.6);
   outline-offset: 4px;
 }
