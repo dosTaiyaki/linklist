@@ -39,9 +39,10 @@ const LINKS = [
     {
         label: "note",
         url: "https://note.com/taiyakidos",
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.07 0A4.07 4.07 0 0 0 0 4.07v15.86A4.07 4.07 0 0 0 4.07 24h15.86A4.07 4.07 0 0 0 24 19.93V4.07A4.07 4.07 0 0 0 19.93 0zm10.88 4.91c.57 0 1.04.46 1.04 1.03v3.12c0 .57-.47 1.03-1.04 1.03H9.05a1.04 1.04 0 0 1-1.04-1.03V5.94c0-.57.46-1.03 1.04-1.03zm2.08 7.24c.5 0 .9.41.9.9v1.04a.9.9 0 0 1-.9.9H7.07a.9.9 0 0 1-.9-.9v-1.04c0-.49.4-.9.9-.9zm0 4.16c.5 0 .9.4.9.9v1.04a.9.9 0 0 1-.9.9H7.07a.9.9 0 0 1-.9-.9v-1.04c0-.5.4-.9.9-.9z"/></svg>`,
+        icon: `<img src="./ico/note.png" alt="note" />`,
         color: "var(--color-note)",
     },
+
     {
         label: "Discord（サーバー参加）",
         url: "https://discord.com/invite/A6Gy7ggmq2",
@@ -114,4 +115,10 @@ function initFadeIn() {
 document.addEventListener("DOMContentLoaded", () => {
     buildLinks();
     initFadeIn();
+
+    // update copyright year automatically
+    const yearElem = document.getElementById('year');
+    if (yearElem) {
+      yearElem.textContent = new Date().getFullYear();
+    }
 });

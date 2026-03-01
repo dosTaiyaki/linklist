@@ -13,7 +13,7 @@
     <meta property="og:title" content="Taiyakidos | リンク一覧" />
     <meta property="og:description"
         content="Taiyakidos の各種SNSリンクまとめページです。YouTube・X・Instagram・Threads・Misskey・note・Discord など。" />
-    <meta property="og:image" content="./images/ogp.png" />
+    <meta property="og:image" content="./assets/images/header.png" />
     <meta property="og:url" content="https://taiyakidos.github.io/linklist/" />
     <meta property="og:site_name" content="Taiyakidos Links" />
 
@@ -21,19 +21,28 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
     <meta name="twitter:description" content="Taiyakidos の各種SNSリンクまとめページです。" />
-    <meta name="twitter:image" content="./images/ogp.png" />
+    <meta name="twitter:image" content="./assets/images/header.png" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./ico/YouTube.png" />
 
     <!-- Google Analytics （GA4） -->
-    <!-- ★ 測定IDを G-XXXXXXXXXX から実際のIDに差し替えてください ★ -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- 測定IDは下記metaタグに入力してください -->
+    <meta name="ga-id" content="G-XXXXXXXXXX" />
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX'); /* ★ ここも差し替え ★ */
+        (function(){
+            const meta = document.querySelector('meta[name="ga-id"]');
+            const GA_ID = meta ? meta.content.trim() : '';
+            if (!GA_ID || GA_ID === 'G-XXXXXXXXXX') return;
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', GA_ID);
+        })();
     </script>
 
     <!-- Stylesheet -->
@@ -41,12 +50,15 @@
 </head>
 
 <body>
+    <header class="site-header">
+        <img class="site-header__img" src="./assets/images/header.png" alt="Taiyakidos Header" />
+    </header>
     <main class="container" id="main">
         <!-- プロフィール -->
         <section class="profile" id="profile">
-            <img class="profile__avatar" src="./images/profile.png" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
+            <img class="profile__avatar" src="./assets/images/avatar.jpg" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
             <h1 class="profile__name">Taiyakidos</h1>
-            <p class="profile__bio">Taiyakidosの各種SNSリンクまとめ🐟<br>お気軽にフォローしてね！</p>
+            <p class="profile__bio">Taiyakidosの各種SNSリンクまとめ<br>お気軽にフォローしてね！</p>
         </section>
 
         <!-- リンク一覧（script.js により動的生成） -->
@@ -54,7 +66,7 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 Taiyakidos</p>
+        <p id="copyright">&copy; <span id="year">2025</span> Taiyakidos</p>
     </footer>
 
     <script src="./script.js"></script>

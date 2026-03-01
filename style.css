@@ -14,7 +14,7 @@
   --color-instagram: #E1306C;
   --color-threads:   #000000;
   --color-misskey:   #86B300;
-  --color-note:      #41C9B4;
+  --color-note:      #FFB100; /* note official color */
   --color-discord:   #5865F2;
 
   /* レイアウト */
@@ -23,12 +23,12 @@
   --radius-avatar: 50%;
 
   /* ライトテーマ */
-  --bg:           #F4F4F8;
+  --bg:           #FFF8F0; /* 温かみのある淡いベージュ */
   --surface:      #FFFFFF;
-  --surface-hover:#F0F0F8;
-  --text-primary: #111118;
-  --text-secondary:#555568;
-  --border:       rgba(0, 0, 0, 0.08);
+  --surface-hover:#FFEFE0; /* 優しいオレンジ系 */
+  --text-primary: #2A2A2A; /* やや柔らかい黒 */
+  --text-secondary:#6A6A6A; /* 暖かいグレー */
+  --border:       rgba(0, 0, 0, 0.05); /* 細め */
   --shadow:       0 2px 12px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.14);
 
@@ -42,12 +42,12 @@
     --color-x:       #FFFFFF;
     --color-threads: #FFFFFF;
 
-    --bg:            #0F0F14;
-    --surface:       #1C1C26;
-    --surface-hover: #252533;
-    --text-primary:  #F0F0F8;
-    --text-secondary:#9090A8;
-    --border:        rgba(255, 255, 255, 0.08);
+    --bg:            #1A1A1F; /* 暗めだが少し柔らかく */
+    --surface:       #24242D;
+    --surface-hover: #2E2E3A;
+    --text-primary:  #F5F5F9;
+    --text-secondary:#A0A0B0;
+    --border:        rgba(255, 255, 255, 0.06);
     --shadow:        0 2px 12px rgba(0, 0, 0, 0.4);
     --shadow-hover:  0 6px 24px rgba(0, 0, 0, 0.6);
   }
@@ -80,6 +80,29 @@ body {
   padding: 40px 16px 24px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- サイトヘッダー ---------- */
+.site-header {
+  width: 100%;
+  max-width: var(--max-width);
+  background: var(--surface);
+  /* border-bottom removed per request */
+  padding: 12px 0;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.site-header__img {
+  width: 100%;
+  max-width: var(--max-width);
+  border-radius: var(--radius-card);
+  display: block;
+  margin: 0 auto 8px;
+}
+.site-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 /* ---------- メインコンテナ ---------- */
