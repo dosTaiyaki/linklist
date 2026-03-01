@@ -1,0 +1,314 @@
+/* ===================================================
+   style.css — Taiyakidos Link Page
+   prefers-color-scheme でOSのテーマに自動追従
+   =================================================== */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- CSS カスタムプロパティ（ライトモード） ---------- */
+:root {
+  /* ブランドカラー */
+  --color-youtube:   #FF0000;
+  --color-x:         #000000;
+  --color-instagram: #E1306C;
+  --color-threads:   #000000;
+  --color-misskey:   #86B300;
+  --color-note:      #41C9B4;
+  --color-discord:   #5865F2;
+
+  /* レイアウト */
+  --max-width: 480px;
+  --radius-card: 16px;
+  --radius-avatar: 50%;
+
+  /* ライトテーマ */
+  --bg:           #F4F4F8;
+  --surface:      #FFFFFF;
+  --surface-hover:#F0F0F8;
+  --text-primary: #111118;
+  --text-secondary:#555568;
+  --border:       rgba(0, 0, 0, 0.08);
+  --shadow:       0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.14);
+
+  /* タイポグラフィ */
+  --font-sans: 'Inter', 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif;
+}
+
+/* ---------- ダークテーマ ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-x:       #FFFFFF;
+    --color-threads: #FFFFFF;
+
+    --bg:            #0F0F14;
+    --surface:       #1C1C26;
+    --surface-hover: #252533;
+    --text-primary:  #F0F0F8;
+    --text-secondary:#9090A8;
+    --border:        rgba(255, 255, 255, 0.08);
+    --shadow:        0 2px 12px rgba(0, 0, 0, 0.4);
+    --shadow-hover:  0 6px 24px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ---------- リセット ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- ベース ---------- */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px 24px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- メインコンテナ ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+}
+
+/* ---------- プロフィール ---------- */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.profile__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-avatar);
+  object-fit: cover;
+  border: 3px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: avatarPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.profile__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.profile__bio {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 320px;
+}
+
+/* ---------- リンク一覧 ---------- */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ---------- リンクカード ---------- */
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background-color 0.15s ease;
+  /* アクセントカラーの変数は script.js が各要素に inline style でセット */
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent, #888) 12%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: inherit;
+}
+
+.link-card:hover,
+.link-card:focus-visible {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--shadow-hover);
+  background-color: var(--surface-hover);
+}
+
+.link-card:hover::before,
+.link-card:focus-visible::before {
+  opacity: 1;
+}
+
+.link-card:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* アイコン */
+.link-card__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent, var(--text-primary));
+  transition: transform 0.2s ease;
+}
+
+.link-card__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.link-card:hover .link-card__icon {
+  transform: scale(1.12);
+}
+
+/* ラベル */
+.link-card__label {
+  flex: 1;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* 矢印 */
+.link-card__arrow {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.link-card__arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.link-card:hover .link-card__arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ---------- フェードイン ---------- */
+.fade-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- アバターポップアニメーション ---------- */
+@keyframes avatarPop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- フッター ---------- */
+.footer {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-top: 32px;
+  padding-bottom: 16px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* ---------- フォーカスリング ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent, #5865F2);
+  outline-offset: 3px;
+}
+
+/* ---------- メディアクエリ（大画面） ---------- */
+@media (min-width: 600px) {
+  body {
+    padding-top: 64px;
+  }
+
+  .profile__avatar {
+    width: 112px;
+    height: 112px;
+  }
+
+  .profile__name {
+    font-size: 1.75rem;
+  }
+}
+
+/* ---------- モーション軽減設定 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-item {
+    opacity: 1;
+    transform: none;
+  }
+}

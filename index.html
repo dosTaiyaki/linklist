@@ -2,97 +2,62 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taiyakidos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taiyakidos | リンク一覧</title>
+    <meta name="description"
+        content="Taiyakidos の各種SNSリンクまとめページです。YouTube・X・Instagram・Threads・Misskey・note・Discord など。" />
 
-  <meta name="description"
-    content="Taiyakidosのリンク集。X / Instagram / YouTube / Discord / note / Misskey / Threads / Mail へまとめてアクセスできます。">
-  <meta name="keywords" content="Taiyakidos, リンク集, SNS, X, Instagram, YouTube, Discord, note, Misskey, Threads">
-  <meta name="author" content="Taiyakidos">
-  <meta name="msvalidate.01" content="2F7731127DBC6CC1F8DC03F16EA4CC59">
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Taiyakidos | リンク一覧" />
+    <meta property="og:description"
+        content="Taiyakidos の各種SNSリンクまとめページです。YouTube・X・Instagram・Threads・Misskey・note・Discord など。" />
+    <meta property="og:image" content="./images/ogp.png" />
+    <meta property="og:url" content="https://taiyakidos.github.io/linklist/" />
+    <meta property="og:site_name" content="Taiyakidos Links" />
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=__GA_ID__"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', '__GA_ID__');
-  </script>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
+    <meta name="twitter:description" content="Taiyakidos の各種SNSリンクまとめページです。" />
+    <meta name="twitter:image" content="./images/ogp.png" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
 
-  <link rel="icon" type="image/jpeg" href="assets/images/avatar.jpg">
-  <link rel="apple-touch-icon" href="assets/images/avatar.jpg">
-  <link rel="stylesheet" href="css/style.css">
+    <!-- Google Analytics （GA4） -->
+    <!-- ★ 測定IDを G-XXXXXXXXXX から実際のIDに差し替えてください ★ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); /* ★ ここも差し替え ★ */
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <div class="banner">
-    <img src="assets/images/header.png" alt="Taiyaki banner">
-  </div>
-
-  <div class="container">
-    <header class="header-wrapper">
-      <img src="assets/images/avatar.jpg" alt="プロフィール画像" class="profile-img">
-      <h1>Taiyakidos</h1>
-      <p class="subtitle">リンク集</p>
-    </header>
-
-    <main>
-      <div id="link-container">
-        <section class="link-section">
-          <div class="link-grid">
-            <a href="https://x.com/Taiyakidos" target="_blank" rel="me noopener noreferrer"
-              class="link-card twitter">
-              <img class="sns-icon" src="ico/X.png" alt="X">
-              <span class="link-text">X (main)</span>
-            </a>
-            <a href="https://www.instagram.com/taiyakidos" target="_blank" rel="me noopener noreferrer"
-              class="link-card instagram">
-              <img class="sns-icon" src="ico/Instagram.png" alt="Instagram">
-              <span class="link-text">Instagram</span>
-            </a>
-            <a href="https://www.youtube.com/@Taiyakidos" target="_blank" rel="me noopener noreferrer"
-              class="link-card youtube">
-              <img class="sns-icon" src="ico/YouTube.png" alt="YouTube">
-              <span class="link-text">YouTube</span>
-            </a>
-            <a href="https://discord.gg/" target="_blank" rel="me noopener noreferrer" class="link-card discord">
-              <img class="sns-icon" src="ico/Discord.png" alt="Discord">
-              <span class="link-text">Discord</span>
-            </a>
-            <a href="https://note.com/" target="_blank" rel="me noopener noreferrer" class="link-card note">
-              <img class="sns-icon" src="ico/note.png" alt="note">
-              <span class="link-text">note</span>
-            </a>
-            <a href="https://misskey.io/" target="_blank" rel="me noopener noreferrer" class="link-card misskey">
-              <img class="sns-icon" src="ico/Misskey.png" alt="Misskey">
-              <span class="link-text">Misskey</span>
-            </a>
-            <a href="https://www.threads.net/" target="_blank" rel="me noopener noreferrer" class="link-card threads">
-              <img class="sns-icon" src="ico/Threads.png" alt="Threads">
-              <span class="link-text">Threads</span>
-            </a>
-            <a href="mailto:hello@example.com" class="link-card mail">
-              <img class="sns-icon" src="ico/mail.svg" alt="Mail">
-              <span class="link-text">Mail</span>
-            </a>
-          </div>
+    <main class="container" id="main">
+        <!-- プロフィール -->
+        <section class="profile" id="profile">
+            <img class="profile__avatar" src="./images/profile.png" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
+            <h1 class="profile__name">Taiyakidos</h1>
+            <p class="profile__bio">Taiyakidosの各種SNSリンクまとめ🐟<br>お気軽にフォローしてね！</p>
         </section>
-      </div>
+
+        <!-- リンク一覧（script.js により動的生成） -->
+        <nav class="links" id="links" aria-label="SNSリンク一覧"></nav>
     </main>
 
-    <footer>
-      <span>© <span id="year"></span> Taiyakidos</span>
+    <footer class="footer">
+        <p>&copy; 2025 Taiyakidos</p>
     </footer>
-  </div>
 
-  <script src="js/scriptsapp.js" defer></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
