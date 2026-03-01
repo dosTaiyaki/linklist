@@ -2,6 +2,16 @@
 <html lang="ja">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taiyakidos</title>
+
+  <meta name="description"
+    content="Taiyakidosのリンク集。X / Instagram / YouTube / Discord / note / Misskey / Threads / Mail へまとめてアクセスできます。">
+  <meta name="keywords" content="Taiyakidos, リンク集, SNS, X, Instagram, YouTube, Discord, note, Misskey, Threads">
+  <meta name="author" content="Taiyakidos">
+  <meta name="msvalidate.01" content="2F7731127DBC6CC1F8DC03F16EA4CC59">
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=__GA_ID__"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,34 +20,20 @@
     gtag('config', '__GA_ID__');
   </script>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taiyakidos</title>
-
-  <meta name="description"
-    content="Taiyakidosのリンク集です。X、Instagram、YouTube、Discord、note、Misskey、Threadsなど、様々なプラットフォームで活動しています。">
-  <meta name="keywords" content="Taiyakidos, リットリンク, SNS, リンク集, X, Instagram, YouTube, Discord, note, Misskey, Threads">
-  <meta name="author" content="Taiyakidos">
-  <meta name="msvalidate.01" content="2F7731127DBC6CC1F8DC03F16EA4CC59" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  <!-- Font Awesome removed: using local icons in /ico/ -->
-
   <link rel="icon" type="image/jpeg" href="assets/images/avatar.jpg">
   <link rel="apple-touch-icon" href="assets/images/avatar.jpg">
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
   <div class="banner">
-    <img src="assets/images/header.png" alt="Taiyaki banner" />
+    <img src="assets/images/header.png" alt="Taiyaki banner">
   </div>
 
   <div class="container">
@@ -51,7 +47,8 @@
       <div id="link-container">
         <section class="link-section">
           <div class="link-grid">
-            <a href="https://x.com/Taiyakidos" target="_blank" rel="me noopener noreferrer" class="link-card twitter">
+            <a href="https://x.com/Taiyakidos" target="_blank" rel="me noopener noreferrer"
+              class="link-card twitter">
               <img class="sns-icon" src="ico/X.png" alt="X">
               <span class="link-text">X (main)</span>
             </a>
@@ -62,3 +59,40 @@
             </a>
             <a href="https://www.youtube.com/@Taiyakidos" target="_blank" rel="me noopener noreferrer"
               class="link-card youtube">
+              <img class="sns-icon" src="ico/YouTube.png" alt="YouTube">
+              <span class="link-text">YouTube</span>
+            </a>
+            <a href="https://discord.gg/" target="_blank" rel="me noopener noreferrer" class="link-card discord">
+              <img class="sns-icon" src="ico/Discord.png" alt="Discord">
+              <span class="link-text">Discord</span>
+            </a>
+            <a href="https://note.com/" target="_blank" rel="me noopener noreferrer" class="link-card note">
+              <img class="sns-icon" src="ico/note.png" alt="note">
+              <span class="link-text">note</span>
+            </a>
+            <a href="https://misskey.io/" target="_blank" rel="me noopener noreferrer" class="link-card misskey">
+              <img class="sns-icon" src="ico/Misskey.png" alt="Misskey">
+              <span class="link-text">Misskey</span>
+            </a>
+            <a href="https://www.threads.net/" target="_blank" rel="me noopener noreferrer" class="link-card threads">
+              <img class="sns-icon" src="ico/Threads.png" alt="Threads">
+              <span class="link-text">Threads</span>
+            </a>
+            <a href="mailto:hello@example.com" class="link-card mail">
+              <img class="sns-icon" src="ico/mail.svg" alt="Mail">
+              <span class="link-text">Mail</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Taiyakidos</span>
+    </footer>
+  </div>
+
+  <script src="js/scriptsapp.js" defer></script>
+</body>
+
+</html>
