@@ -1,59 +1,48 @@
-/* ===================================================
-   style.css — Taiyakidos Link Page
-   prefers-color-scheme でOSのテーマに自動追従
-   =================================================== */
-
-/* ---------- Google Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-/* ---------- CSS カスタムプロパティ（ライトモード） ---------- */
 :root {
-  /* ブランドカラー */
-  --color-youtube:   #FF0000;
-  --color-x:         #000000;
-  --color-instagram: #E1306C;
-  --color-threads:   #000000;
-  --color-misskey:   #86B300;
-  --color-note:      #FFB100; /* note official color */
-  --color-discord:   #5865F2;
+  --color-youtube: #ff0000;
+  --color-x: #101010;
+  --color-instagram: #e1306c;
+  --color-threads: #0f0f0f;
+  --color-misskey: #86b300;
+  --color-note: #ffb100;
+  --color-discord: #5865f2;
+  --color-mail: #f08a3e;
 
-  /* レイアウト */
-  --max-width: 480px;
-  --radius-card: 16px;
+  --max-width: 520px;
+  --radius-card: 18px;
   --radius-avatar: 50%;
 
-  /* ライトテーマ */
-  --bg:           #FFF8F0; /* 温かみのある淡いベージュ */
-  --surface:      #FFFFFF;
-  --surface-hover:#FFEFE0; /* 優しいオレンジ系 */
-  --text-primary: #2A2A2A; /* やや柔らかい黒 */
-  --text-secondary:#6A6A6A; /* 暖かいグレー */
-  --border:       rgba(0, 0, 0, 0.05); /* 細め */
-  --shadow:       0 2px 12px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.14);
+  --bg: #fff5ec;
+  --bg-accent: #ffd7b8;
+  --surface: #ffffffcc;
+  --surface-hover: #fff6ef;
+  --text-primary: #2e2520;
+  --text-secondary: #715c50;
+  --border: #e9d8cb;
+  --shadow: 0 8px 24px rgba(177, 99, 55, 0.14);
+  --shadow-hover: 0 14px 34px rgba(177, 99, 55, 0.22);
 
-  /* タイポグラフィ */
-  --font-sans: 'Inter', 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif;
+  --font-sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-display: "Sora", var(--font-sans);
 }
 
-/* ---------- ダークテーマ ---------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-x:       #FFFFFF;
-    --color-threads: #FFFFFF;
+    --color-x: #ffffff;
+    --color-threads: #ffffff;
 
-    --bg:            #1A1A1F; /* 暗めだが少し柔らかく */
-    --surface:       #24242D;
-    --surface-hover: #2E2E3A;
-    --text-primary:  #F5F5F9;
-    --text-secondary:#A0A0B0;
-    --border:        rgba(255, 255, 255, 0.06);
-    --shadow:        0 2px 12px rgba(0, 0, 0, 0.4);
-    --shadow-hover:  0 6px 24px rgba(0, 0, 0, 0.6);
+    --bg: #1b1716;
+    --bg-accent: #3e2e25;
+    --surface: #282120cc;
+    --surface-hover: #322a27;
+    --text-primary: #fff3eb;
+    --text-secondary: #d2b9aa;
+    --border: #4a3b35;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 14px 34px rgba(0, 0, 0, 0.5);
   }
 }
 
-/* ---------- リセット ---------- */
 *,
 *::before,
 *::after {
@@ -62,7 +51,6 @@
   padding: 0;
 }
 
-/* ---------- ベース ---------- */
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
@@ -71,57 +59,50 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg);
   color: var(--text-primary);
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 16px 24px;
-  line-height: 1.6;
+  padding: 38px 16px 24px;
+  line-height: 1.65;
+  background:
+    radial-gradient(1000px 500px at 50% -180px, var(--bg-accent), transparent 70%),
+    linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 88%, #ffffff 12%));
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- サイトヘッダー ---------- */
-.site-header {
+.site-header,
+.container,
+.footer {
   width: 100%;
   max-width: var(--max-width);
-  background: var(--surface);
-  /* border-bottom removed per request */
-  padding: 12px 0;
-  text-align: center;
-  margin-bottom: 24px;
-}
-.site-header__img {
-  width: 100%;
-  max-width: var(--max-width);
-  border-radius: var(--radius-card);
-  display: block;
-  margin: 0 auto 8px;
-}
-.site-header h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-secondary);
 }
 
-/* ---------- メインコンテナ ---------- */
-.container {
+.site-header {
+  margin-bottom: 24px;
+}
+
+.site-header__img {
   width: 100%;
-  max-width: var(--max-width);
+  border-radius: calc(var(--radius-card) + 4px);
+  display: block;
+  box-shadow: var(--shadow);
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 34px;
   flex: 1;
 }
 
-/* ---------- プロフィール ---------- */
 .profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding-top: 8px;
+  gap: 10px;
+  text-align: center;
 }
 
 .profile__avatar {
@@ -129,73 +110,61 @@ body {
   height: 96px;
   border-radius: var(--radius-avatar);
   object-fit: cover;
-  border: 3px solid var(--border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  animation: avatarPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  border: 3px solid color-mix(in srgb, var(--border) 80%, #ffffff 20%);
+  box-shadow: 0 8px 22px rgba(33, 23, 18, 0.2);
+  animation: avatar-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .profile__name {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
 }
 
 .profile__bio {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  text-align: center;
-  max-width: 320px;
+  max-width: 340px;
 }
 
-/* ---------- リンク一覧 ---------- */
 .links {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* ---------- リンクカード ---------- */
 .link-card {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 15px 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow);
-  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: blur(4px);
   color: var(--text-primary);
-  cursor: pointer;
+  text-decoration: none;
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.2s ease,
-    background-color 0.15s ease;
-  /* アクセントカラーの変数は script.js が各要素に inline style でセット */
+  box-shadow: var(--shadow);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.15s ease;
 }
 
 .link-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--accent, #888) 12%, transparent),
-    transparent 60%
-  );
+  border-left: 5px solid color-mix(in srgb, var(--accent, #777) 70%, #ffffff 30%);
+  background: linear-gradient(130deg, color-mix(in srgb, var(--accent, #888) 14%, transparent), transparent 62%);
   opacity: 0;
   transition: opacity 0.2s ease;
-  border-radius: inherit;
 }
 
 .link-card:hover,
 .link-card:focus-visible {
   transform: translateY(-3px) scale(1.01);
-  box-shadow: var(--shadow-hover);
   background-color: var(--surface-hover);
+  box-shadow: var(--shadow-hover);
 }
 
 .link-card:hover::before,
@@ -207,43 +176,44 @@ body {
   transform: translateY(0) scale(0.99);
 }
 
-/* アイコン */
-.link-card__icon {
+.link-card__icon,
+.link-card__arrow {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.link-card__icon {
+  width: 28px;
+  height: 28px;
   color: var(--accent, var(--text-primary));
   transition: transform 0.2s ease;
 }
 
-.link-card__icon svg {
+.link-card__icon svg,
+.link-card__icon img {
   width: 22px;
   height: 22px;
-  fill: currentColor;
+  display: block;
 }
 
 .link-card:hover .link-card__icon {
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 
-/* ラベル */
 .link-card__label {
   flex: 1;
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.96rem;
 }
 
-/* 矢印 */
 .link-card__arrow {
-  flex-shrink: 0;
   width: 20px;
   height: 20px;
   color: var(--text-secondary);
-  opacity: 0.5;
-  transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .link-card__arrow svg {
@@ -261,13 +231,10 @@ body {
   transform: translateX(3px);
 }
 
-/* ---------- フェードイン ---------- */
 .fade-item {
   opacity: 0;
   transform: translateY(16px);
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .fade-item.is-visible {
@@ -275,40 +242,35 @@ body {
   transform: translateY(0);
 }
 
-/* ---------- アバターポップアニメーション ---------- */
-@keyframes avatarPop {
+.footer {
+  margin-top: 30px;
+  padding-bottom: 14px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent, #5865f2) 80%, #ffffff 20%);
+  outline-offset: 3px;
+}
+
+@keyframes avatar-pop {
   from {
     opacity: 0;
     transform: scale(0.7);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-/* ---------- フッター ---------- */
-.footer {
-  width: 100%;
-  max-width: var(--max-width);
-  margin-top: 32px;
-  padding-bottom: 16px;
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  opacity: 0.6;
-}
-
-/* ---------- フォーカスリング ---------- */
-:focus-visible {
-  outline: 2px solid var(--accent, #5865F2);
-  outline-offset: 3px;
-}
-
-/* ---------- メディアクエリ（大画面） ---------- */
 @media (min-width: 600px) {
   body {
-    padding-top: 64px;
+    padding-top: 56px;
   }
 
   .profile__avatar {
@@ -317,11 +279,10 @@ body {
   }
 
   .profile__name {
-    font-size: 1.75rem;
+    font-size: 1.95rem;
   }
 }
 
-/* ---------- モーション軽減設定 ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

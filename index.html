@@ -2,65 +2,64 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taiyakidos | リンク一覧</title>
-    <meta name="description"
-        content="Taiyakidos の各種SNSリンクまとめページです。YouTube・X・Instagram・Threads・Misskey・note・Discord など。" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taiyakidos | リンク一覧</title>
+  <meta name="description" content="Taiyakidosの各種SNSリンクをまとめたページです。YouTube・X・Instagram・Threads・Misskey・note・Discordへの導線を掲載しています。" />
+  <meta name="theme-color" content="#ff8f5a" />
 
-    <!-- OGP -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Taiyakidos | リンク一覧" />
-    <meta property="og:description"
-        content="Taiyakidos の各種SNSリンクまとめページです。YouTube・X・Instagram・Threads・Misskey・note・Discord など。" />
-    <meta property="og:image" content="./assets/images/header.png" />
-    <meta property="og:url" content="https://taiyakidos.github.io/linklist/" />
-    <meta property="og:site_name" content="Taiyakidos Links" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Taiyakidos | リンク一覧" />
+  <meta property="og:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
+  <meta property="og:image" content="./assets/images/header.png" />
+  <meta property="og:url" content="https://taiyakidos.github.io/linklist/" />
+  <meta property="og:site_name" content="Taiyakidos Links" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
-    <meta name="twitter:description" content="Taiyakidos の各種SNSリンクまとめページです。" />
-    <meta name="twitter:image" content="./assets/images/header.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
+  <meta name="twitter:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
+  <meta name="twitter:image" content="./assets/images/header.png" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./ico/YouTube.png" />
+  <link rel="icon" type="image/png" href="./ico/YouTube.png" />
 
-    <!-- Google Analytics （GA4） -->
-    <!-- 直打ちスニペット -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HM9CKPBG0X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HM9CKPBG0X');
-    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="./style.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HM9CKPBG0X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HM9CKPBG0X');
+  </script>
+
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-    <header class="site-header">
-        <img class="site-header__img" src="./assets/images/header.png" alt="Taiyakidos Header" />
-    </header>
-    <main class="container" id="main">
-        <!-- プロフィール -->
-        <section class="profile" id="profile">
-            <img class="profile__avatar" src="./assets/images/avatar.jpg" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
-            <h1 class="profile__name">Taiyakidos</h1>
-            <p class="profile__bio">Taiyakidosの各種SNSリンクまとめ<br>お気軽にフォローしてね！</p>
-        </section>
+  <header class="site-header">
+    <img class="site-header__img" src="./assets/images/header.png" alt="Taiyakidos ヘッダー画像" />
+  </header>
 
-        <!-- リンク一覧（script.js により動的生成） -->
-        <nav class="links" id="links" aria-label="SNSリンク一覧"></nav>
-    </main>
+  <main class="container" id="main">
+    <section class="profile" id="profile">
+      <img class="profile__avatar" src="./assets/images/avatar.jpg" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
+      <h1 class="profile__name">Taiyakidos</h1>
+      <p class="profile__bio">
+        Taiyakidos の各種SNSリンクまとめ。<br />
+        気になるところからどうぞ。
+      </p>
+    </section>
 
-    <footer class="footer">
-        <p id="copyright">&copy; <span id="year">2025</span> Taiyakidos</p>
-    </footer>
+    <nav class="links" id="links" aria-label="SNSリンク一覧"></nav>
+  </main>
 
-    <script src="./script.js"></script>
+  <footer class="footer">
+    <p>&copy; <span id="year">2026</span> Taiyakidos</p>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 
 </html>
