@@ -21,6 +21,11 @@
   --border: #e9d8cb;
   --shadow: 0 8px 24px rgba(177, 99, 55, 0.14);
   --shadow-hover: 0 14px 34px rgba(177, 99, 55, 0.22);
+  --icon-plate: #fffaf5;
+  --icon-plate-border: #ead8cb;
+  --icon-plate-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --icon-note-bg: #111111;
+  --icon-note-border: #2a2a2a;
 
   --font-sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-display: "Sora", var(--font-sans);
@@ -40,6 +45,11 @@
     --border: #4a3b35;
     --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     --shadow-hover: 0 14px 34px rgba(0, 0, 0, 0.5);
+    --icon-plate: #2f2826;
+    --icon-plate-border: #4f4039;
+    --icon-plate-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    --icon-note-bg: #050505;
+    --icon-note-border: #6a6a6a;
   }
 }
 
@@ -185,17 +195,26 @@ body {
 }
 
 .link-card__icon {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--icon-plate);
+  border: 1px solid var(--icon-plate-border);
+  box-shadow: var(--icon-plate-shadow);
   color: var(--accent, var(--text-primary));
   transition: transform 0.2s ease;
 }
 
 .link-card__icon svg,
 .link-card__icon img {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: block;
+}
+
+.link-card[href*="note.com"] .link-card__icon {
+  background: var(--icon-note-bg);
+  border-color: var(--icon-note-border);
 }
 
 .link-card:hover .link-card__icon {
