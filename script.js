@@ -1,0 +1,143 @@
+// リンクデータ定義（ハードコード定数のため innerHTML 経由でも XSS リスクなし）
+// 外部ソースからの取得に変更する場合はサニタイズ処理を追加してください。
+const LINKS = [
+  {
+    label: "X（メイン）",
+    url: "https://x.com/Taiyakidos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L2.25 2.25h6.927l4.253 5.649zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+    color: "var(--color-x)",
+  },
+  {
+    label: "X（サブ）",
+    url: "https://x.com/Taiyakidos_sub",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L2.25 2.25h6.927l4.253 5.649zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+    color: "var(--color-x)",
+  },
+  {
+    label: "YouTube",
+    url: "https://www.youtube.com/@Taiyakidos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.01 3.01 0 0 0-2.12-2.13C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.57A3.01 3.01 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3.01 3.01 0 0 0 2.12 2.13C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.57a3.01 3.01 0 0 0 2.12-2.13A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.52V8.48L15.82 12l-6.07 3.52z"/></svg>`,
+    color: "var(--color-youtube)",
+  },
+  {
+    label: "Instagram",
+    url: "https://www.instagram.com/taiyakidos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+    color: "var(--color-instagram)",
+  },
+  {
+    label: "Threads",
+    url: "https://www.threads.com/@taiyakidos",
+    icon: `<picture><source srcset="./ico/Threads_w.png" media="(prefers-color-scheme: dark)"><img src="./ico/Threads_b.png" alt="Threads アイコン" width="24" height="24" /></picture>`,
+    color: "var(--color-threads)",
+  },
+  {
+    label: "Misskey.io",
+    url: "https://misskey.io/@Taiyakidos",
+    icon: `<img src="./ico/misskey.png" alt="Misskey アイコン" width="24" height="24" />`,
+    color: "var(--color-misskey)",
+  },
+  {
+    label: "note",
+    url: "https://note.com/taiyakidos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 493 493" aria-hidden="true"><path d="m139.57,142.06c41.19,0,97.6-2.09,138.1-1.04,54.34,1.39,74.76,25.06,75.45,83.53.69,33.06,0,127.73,0,127.73h-58.79c0-82.83.35-96.5,0-122.6-.69-22.97-7.25-33.92-24.9-36.01-18.69-2.09-71.07-.35-71.07-.35v158.96h-58.79v-210.22Z"/></svg>`, 
+    color: "var(--color-note)",
+  },
+  {
+    label: "質問箱",
+    url: "https://note.com/qa/taiyakidos",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 493 493" aria-hidden="true"><path d="m139.57,142.06c41.19,0,97.6-2.09,138.1-1.04,54.34,1.39,74.76,25.06,75.45,83.53.69,33.06,0,127.73,0,127.73h-58.79c0-82.83.35-96.5,0-122.6-.69-22.97-7.25-33.92-24.9-36.01-18.69-2.09-71.07-.35-71.07-.35v158.96h-58.79v-210.22Z"/></svg>`, 
+    color: "var(--color-note)",
+  },
+  {
+    label: "Discord（コミュニティ）",
+    url: "https://discord.com/invite/A6Gy7ggmq2",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>`,
+    color: "var(--color-discord)",
+  },
+  {
+    label: "Discord（個人アカウント）",
+    url: "https://discord.com/users/813386818644213761",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>`,
+    color: "var(--color-discord)",
+  },
+  {
+    label: "メール",
+    url: "mailto:taiyaki_dos@yahoo.co.jp",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm0 2v.2l8 5 8-5V8H4zm16 8V10.3l-7.5 4.7a1 1 0 0 1-1 0L4 10.3V16h16z"/></svg>`,
+    color: "var(--color-mail)",
+  },
+];
+
+function buildLinks() {
+  const container = document.getElementById("links");
+  if (!container) return;
+
+  container.replaceChildren();
+
+  const ul = document.createElement("ul");
+  ul.className = "links__list";
+
+  LINKS.forEach((link, index) => {
+    const li = document.createElement("li");
+
+    const card = document.createElement("a");
+    card.href = link.url;
+    const isExternal = /^https?:\/\//i.test(link.url);
+    if (isExternal) {
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+    }
+    card.className = "link-card";
+    card.style.setProperty("--accent", link.color);
+    card.style.setProperty("--i", index);
+    card.setAttribute("aria-label", isExternal ? `${link.label}を新しいタブで開く` : link.label);
+
+    const icon = document.createElement("span");
+    icon.className = "link-card__icon";
+    icon.innerHTML = link.icon;
+
+    const label = document.createElement("span");
+    label.className = "link-card__label";
+    label.textContent = link.label;
+
+    const arrow = document.createElement("span");
+    arrow.className = "link-card__arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>';
+
+    card.append(icon, label, arrow);
+    li.appendChild(card);
+    ul.appendChild(li);
+  });
+
+  container.appendChild(ul);
+}
+
+
+
+/**
+ * クリスマス期間（12/24-25）にアバター画像をクリスマス仕様に差し替えます。
+ */
+function applySeasonalAvatar() {
+  const now = new Date();
+  const month = now.getMonth();
+  const day = now.getDate();
+  if (month === 11 && (day === 24 || day === 25)) {
+    const avatar = document.querySelector(".profile__avatar");
+    if (avatar) {
+      avatar.src = "./assets/images/avatar_christmas.jpg";
+      avatar.alt = "Taiyakidos のクリスマスプロフィール画像";
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  buildLinks();
+  applySeasonalAvatar();
+
+  const yearElem = document.getElementById("year");
+  if (yearElem) {
+    yearElem.textContent = String(new Date().getFullYear());
+  }
+});

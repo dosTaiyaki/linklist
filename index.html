@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taiyakidos | リンク一覧</title>
+  <meta name="description" content="Taiyakidosの各種SNSリンクをまとめたページです。YouTube・X・Instagram・Threads・Misskey・note・Discordへの導線を掲載しています。" />
+  <meta name="theme-color" content="#184f73" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Taiyakidos | リンク一覧" />
+  <meta property="og:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
+  <meta property="og:image" content="https://taiyakidos.github.io/linklist/assets/images/header.jpg" />
+  <meta property="og:url" content="https://taiyakidos.github.io/linklist/" />
+  <meta property="og:site_name" content="Taiyakidos Links" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
+  <meta name="twitter:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
+  <meta name="twitter:image" content="https://taiyakidos.github.io/linklist/assets/images/header.jpg" />
+
+  <link rel="icon" type="image/jpeg" href="./assets/images/avatar.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HM9CKPBG0X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HM9CKPBG0X');
+  </script>
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Taiyakidos",
+        "url": "https://taiyakidos.github.io/linklist/",
+        "image": "https://taiyakidos.github.io/linklist/assets/images/avatar.jpg",
+        "sameAs": [
+          "https://x.com/Taiyakidos",
+          "https://www.youtube.com/@Taiyakidos",
+          "https://www.instagram.com/taiyakidos",
+          "https://www.threads.com/@taiyakidos",
+          "https://misskey.io/@Taiyakidos",
+          "https://note.com/taiyakidos"
+        ]
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <img class="site-header__img" src="./assets/images/header.jpg" alt="Taiyakidos ヘッダー画像" fetchpriority="high" />
+  </header>
+
+  <main class="container" id="main">
+    <section class="profile" id="profile">
+      <img class="profile__avatar" src="./assets/images/avatar.jpg" alt="Taiyakidos のプロフィール画像" width="96" height="96" />
+      <h1 class="profile__name">Taiyakidos</h1>
+      <p class="profile__bio">
+        Taiyakidos の各種SNSリンクまとめ。<br />
+        気になるところからどうぞ。
+      </p>
+    </section>
+
+    <nav class="links" id="links" aria-label="SNSリンク一覧"></nav>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year">2026</span> Taiyakidos</p>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
