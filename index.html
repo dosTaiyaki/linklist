@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -12,14 +14,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Taiyakidos | リンク一覧" />
   <meta property="og:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
-  <meta property="og:image" content="https://dostaiyaki.github.io/linklist/assets/images/header.jpg" />
+  <meta property="og:image" content="https://dostaiyaki.github.io/linklist/assets/images/ogp.jpg" />
   <meta property="og:url" content="https://dostaiyaki.github.io/linklist/" />
   <meta property="og:site_name" content="Taiyakidos Links" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Taiyakidos | リンク一覧" />
   <meta name="twitter:description" content="Taiyakidosの各種SNSリンクをまとめたページです。" />
-  <meta name="twitter:image" content="https://dostaiyaki.github.io/linklist/assets/images/header.jpg" />
+  <meta name="twitter:image" content="https://dostaiyaki.github.io/linklist/assets/images/ogp.jpg" />
 
   <link rel="icon" type="image/jpeg" href="./assets/images/avatar.jpg" />
 
@@ -52,7 +54,8 @@
           "https://www.instagram.com/taiyakidos",
           "https://www.threads.com/@taiyakidos",
           "https://misskey.io/@Taiyakidos",
-          "https://note.com/taiyakidos"
+          "https://note.com/taiyakidos",
+          "https://github.com/dosTaiyaki"
         ]
       }
     }
@@ -74,11 +77,28 @@
       </p>
     </section>
 
-    <nav class="links" id="links" aria-label="SNSリンク一覧"></nav>
+    <nav class="links" id="links" aria-label="各種リンク一覧">
+      <noscript>
+        <ul class="links__noscript">
+          <li><a href="https://x.com/Taiyakidos" target="_blank" rel="noopener noreferrer">X（メイン）</a></li>
+          <li><a href="https://x.com/Taiyakidos_sub" target="_blank" rel="noopener noreferrer">X（サブ）</a></li>
+          <li><a href="https://www.youtube.com/@Taiyakidos" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          <li><a href="https://www.instagram.com/taiyakidos" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.threads.com/@taiyakidos" target="_blank" rel="noopener noreferrer">Threads</a></li>
+          <li><a href="https://misskey.io/@Taiyakidos" target="_blank" rel="noopener noreferrer">Misskey.io</a></li>
+          <li><a href="https://note.com/taiyakidos" target="_blank" rel="noopener noreferrer">note</a></li>
+          <li><a href="https://note.com/qa/taiyakidos" target="_blank" rel="noopener noreferrer">質問箱</a></li>
+          <li><a href="https://discord.com/invite/A6Gy7ggmq2" target="_blank" rel="noopener noreferrer">Discord（コミュニティ）</a></li>
+          <li><a href="https://discord.com/users/813386818644213761" target="_blank" rel="noopener noreferrer">Discord（個人アカウント）</a></li>
+          <li><a href="https://github.com/dosTaiyaki" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="mailto:taiyaki_dos@yahoo.co.jp">メール（taiyaki_dos@yahoo.co.jp）</a></li>
+        </ul>
+      </noscript>
+    </nav>
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year">2026</span> Taiyakidos</p>
+    <p>&copy; <span id="year">{{ site.time | date: "%Y" }}</span> Taiyakidos</p>
   </footer>
 
   <script src="./script.js"></script>
