@@ -167,6 +167,7 @@
 
     & .site-header__img {
       width: 100%;
+      height: auto;
       border-radius: calc(var(--radius-card) + 4px);
       display: block;
       box-shadow: var(--shadow);
@@ -424,10 +425,6 @@
     color: var(--text-secondary);
   }
 
-  .footer__note {
-    margin-top: 4px;
-    font-size: 0.72rem;
-  }
 }
 
 /* ── Entry keyframes ───────────────────────────── */
