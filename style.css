@@ -116,8 +116,8 @@
     );
 
     /* Typography */
-    --font-sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
-    --font-display: "Sora", var(--font-sans);
+    --font-sans: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+    --font-display: var(--font-sans);
   }
 }
 
