@@ -10,6 +10,8 @@
 @layer tokens {
   :root {
     --brand-red: #b23134;
+    --bg: #174d75;
+    --bg-accent: #1d5a86;
     --bg: light-dark(#174d75, #0c2b44);
     --bg-accent: light-dark(#1d5a86, #123653);
     --surface: light-dark(#ffffff1f, #ffffff17);
@@ -68,7 +70,7 @@
 
   /* --- Group heading --- */
   .links__heading {
-    color: color-mix(in oklch, var(--brand-red) 42%, white);
+    color: color-mix(in oklch, var(--brand-red) 38%, white);
   }
 
   /* --- Link card --- */

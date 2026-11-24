@@ -25,6 +25,48 @@
 
 /* ── Design Tokens ─────────────────────────────── */
 @layer tokens {
+  /* Fallbacks for browsers without light-dark() (plain colors first;
+     the light-dark() declarations in the main :root below win where supported) */
+  :root {
+    --color-x: #101010;
+    --color-threads: #0f0f0f;
+    --color-note: #111111;
+    --color-github: #181717;
+    --bg: #f0f4f8;
+    --bg-accent: #d7e5f2;
+    --surface: #ffffff;
+    --surface-hover: #f4f8fc;
+    --text-primary: #182430;
+    --text-secondary: #506375;
+    --border: #d0deec;
+    --shadow-color: rgba(24, 36, 48, 0.10);
+    --shadow-color-hover: rgba(24, 36, 48, 0.18);
+    --icon-plate: #f7fafc;
+    --icon-plate-border: #d3e1ee;
+    --icon-plate-shadow: 0 1px 4px rgba(24, 36, 48, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-x: #ffffff;
+      --color-threads: #ffffff;
+      --color-note: #ffffff;
+      --color-github: #ffffff;
+      --bg: #111822;
+      --bg-accent: #1b293a;
+      --surface: #1a2330;
+      --surface-hover: #222d3d;
+      --text-primary: #f0f4f8;
+      --text-secondary: #a0b2c6;
+      --border: #2a3a4e;
+      --shadow-color: rgba(0, 0, 0, 0.40);
+      --shadow-color-hover: rgba(0, 0, 0, 0.55);
+      --icon-plate: #222d3d;
+      --icon-plate-border: #33445a;
+      --icon-plate-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+  }
+
   :root {
     color-scheme: light dark;
 
@@ -96,6 +138,7 @@
     align-items: center;
     padding: 38px 16px 24px;
     line-height: 1.65;
+    background-color: var(--bg);
     background:
       radial-gradient(1000px 500px at 50% -180px, var(--bg-accent), transparent 70%),
       linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--bg) 88%, white 12%));
@@ -330,6 +373,21 @@
       font-size: 0.96rem;
     }
 
+    /* Label + supplementary text stack */
+    & .link-card__texts {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    & .link-card__sub {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
     /* Arrow */
     & .link-card__arrow {
       width: 20px;
@@ -364,7 +422,11 @@
     text-align: center;
     font-size: 0.78rem;
     color: var(--text-secondary);
-    opacity: 0.85;
+  }
+
+  .footer__note {
+    margin-top: 4px;
+    font-size: 0.72rem;
   }
 }
 
@@ -402,14 +464,14 @@
   .link-card__copy {
     position: absolute;
     top: 50%;
-    right: 48px;
+    right: 52px;
     transform: translateY(-50%);
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     border-radius: 10px;
     border: 1px solid var(--border);
@@ -419,8 +481,8 @@
   }
 
   .link-card__copy svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     fill: currentColor;
     display: block;
   }
@@ -456,24 +518,3 @@
   }
 }
 
-/* ── Noscript fallback ────────────────────────── */
-@layer components {
-  .links__noscript {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    & a {
-      display: block;
-      padding: 15px 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      background: var(--surface);
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.96rem;
-    }
-  }
-}
