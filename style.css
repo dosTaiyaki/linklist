@@ -36,7 +36,8 @@
     --color-misskey: #86b300;
     --color-note: light-dark(#111111, #ffffff);
     --color-discord: #5865f2;
-    --color-mail: #f08a3e;
+    --color-github: light-dark(#181717, #ffffff);
+--color-mail: #f08a3e;
 
     /* Layout */
     --max-width: 520px;
