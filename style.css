@@ -45,13 +45,14 @@
     --radius-avatar: 50%;
 
     /* Surfaces — light-dark() eliminates @media block */
-    --bg: light-dark(#f0f4f8, #111822);
-    --bg-accent: light-dark(#d7e5f2, #1b293a);
-    --surface: light-dark(#ffffffcc, #1a2330cc);
-    --surface-hover: light-dark(#f4f8fc, #222d3d);
-    --text-primary: light-dark(#182430, #f0f4f8);
-    --text-secondary: light-dark(#506375, #a0b2c6);
-    --border: light-dark(#d0deec, #2a3a4e);
+    --brand-red: #b23134;
+    --bg: light-dark(#174d75, #0c2b44);
+    --bg-accent: light-dark(#1d5a86, #123653);
+    --surface: light-dark(#ffffff1f, #ffffff17);
+    --surface-hover: light-dark(#ffffff30, #ffffff26);
+    --text-primary: #f4f8fb;
+    --text-secondary: #b9cbdc;
+    --border: light-dark(#ffffff3d, #ffffff2e);
 
     /* Shadows — color split for light-dark() compatibility */
     --shadow-color: light-dark(
@@ -66,8 +67,8 @@
     --shadow-hover: 0 14px 34px var(--shadow-color-hover);
 
     /* Icon plate */
-    --icon-plate: light-dark(#f7fafc, #222d3d);
-    --icon-plate-border: light-dark(#d3e1ee, #33445a);
+    --icon-plate: light-dark(#ffffff, #eef3f8);
+    --icon-plate-border: light-dark(#ffffff59, #ffffff40);
     --icon-plate-shadow: 0 1px 4px light-dark(
       oklch(0 0 0 / 0.08),
       oklch(0 0 0 / 0.35)
@@ -78,32 +79,25 @@
     --font-display: "Sora", var(--font-sans);
 
     /* Seasonal accent — switched by [data-season] on <html> (script.js) */
-    --season-accent: oklch(0.62 0.10 235);
-    --season-accent-2: oklch(0.72 0.08 200);
+    --season-accent: oklch(0.58 0.15 22);
+    --season-accent-2: oklch(0.78 0.06 220);
   }
 }
 
 
-  /* Season palettes */
+  /* Season palettes — navy base kept; only accent-2 shifts */
   :root[data-season="spring"] {
-    --season-accent: oklch(0.74 0.11 8);
-    --season-accent-2: oklch(0.82 0.07 350);
-    --bg-accent: light-dark(#f6dde4, #33222b);
+    --season-accent-2: oklch(0.82 0.08 350);
   }
   :root[data-season="summer"] {
-    --season-accent: oklch(0.70 0.13 205);
-    --season-accent-2: oklch(0.80 0.10 165);
-    --bg-accent: light-dark(#cfeef2, #17303a);
+    --season-accent-2: oklch(0.82 0.09 190);
   }
   :root[data-season="autumn"] {
-    --season-accent: oklch(0.68 0.12 55);
-    --season-accent-2: oklch(0.74 0.10 30);
-    --bg-accent: light-dark(#f2e2cc, #33291c);
+    --season-accent-2: oklch(0.78 0.10 60);
   }
   :root[data-season="christmas"] {
-    --season-accent: oklch(0.62 0.16 25);
-    --season-accent-2: oklch(0.66 0.12 150);
-    --bg-accent: light-dark(#f3ddd8, #33231f);
+    --season-accent: oklch(0.60 0.17 25);
+    --season-accent-2: oklch(0.74 0.12 150);
   }
 
 /* ── Base ──────────────────────────────────────── */
@@ -124,11 +118,8 @@
     padding: 38px 16px 24px;
     line-height: 1.65;
     background:
-      radial-gradient(900px 520px at 12% -120px, color-mix(in oklch, var(--season-accent) 30%, transparent), transparent 72%),
-      radial-gradient(820px 520px at 90% 10%, color-mix(in oklch, var(--season-accent-2) 26%, transparent), transparent 72%),
-      radial-gradient(760px 620px at 50% 108%, color-mix(in oklch, var(--season-accent) 18%, transparent), transparent 70%),
-      radial-gradient(1000px 500px at 50% -180px, var(--bg-accent), transparent 70%),
-      linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--bg) 82%, white 18%));
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='168'%3E%3Cg fill='%23ffffff' fill-opacity='0.07' transform='rotate(-12 84 84)'%3E%3Crect x='-10' y='6' width='52' height='38' rx='8'/%3E%3Crect x='56' y='6' width='52' height='38' rx='8'/%3E%3Crect x='122' y='6' width='52' height='38' rx='8'/%3E%3Crect x='10' y='62' width='52' height='38' rx='8'/%3E%3Crect x='76' y='62' width='86' height='38' rx='8'/%3E%3Crect x='-16' y='118' width='86' height='38' rx='8'/%3E%3Crect x='84' y='118' width='52' height='38' rx='8'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(168deg, var(--bg-accent), var(--bg) 55%, color-mix(in oklch, var(--bg) 78%, black 22%));
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
 
@@ -136,39 +127,21 @@
       padding-top: 56px;
     }
 
-    /* Drifting glow orbs (seasonal colors) */
+    /* Red bands — echo the header image's top/bottom stripes */
     &::before,
     &::after {
       content: "";
       position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: var(--brand-red);
       pointer-events: none;
-      z-index: -1;
+      z-index: 10;
     }
 
-    &::before {
-      width: 420px;
-      height: 420px;
-      top: -120px;
-      left: -100px;
-      background: color-mix(in oklch, var(--season-accent) 32%, transparent);
-      animation: orb-drift 16s ease-in-out infinite alternate;
-    }
-
-    &::after {
-      width: 360px;
-      height: 360px;
-      bottom: -100px;
-      right: -80px;
-      background: color-mix(in oklch, var(--season-accent-2) 28%, transparent);
-      animation: orb-drift 20s ease-in-out infinite alternate-reverse;
-    }
-  }
-
-  @keyframes orb-drift {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(70px, 46px) scale(1.18); }
+    &::before { top: 0; }
+    &::after { bottom: 0; }
   }
 }
 
@@ -216,7 +189,7 @@
       height: 96px;
       border-radius: var(--radius-avatar);
       object-fit: cover;
-      border: 3px solid color-mix(in oklch, var(--season-accent) 55%, white 45%);
+      border: 3px solid var(--brand-red);
       box-shadow: 0 8px 22px oklch(0.2 0.04 240 / 0.22);
 
       /* @starting-style replaces @keyframes avatar-pop */
@@ -240,10 +213,9 @@
       font-size: 1.7rem;
       letter-spacing: -0.02em;
       text-wrap: balance;
-      background: linear-gradient(92deg, color-mix(in oklch, var(--season-accent) 78%, var(--text-primary)), color-mix(in oklch, var(--season-accent-2) 78%, var(--text-primary)));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #ffffff;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--brand-red);
 
       @media (min-width: 600px) {
         font-size: 1.95rem;
@@ -272,7 +244,7 @@
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    color: color-mix(in oklch, var(--season-accent) 72%, var(--text-primary));
+    color: color-mix(in oklch, var(--brand-red) 42%, white);
     margin: 14px 4px 2px;
     display: flex;
     align-items: center;
