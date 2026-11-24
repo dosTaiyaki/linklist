@@ -67,7 +67,7 @@
     --shadow-hover: 0 14px 34px var(--shadow-color-hover);
 
     /* Icon plate */
-    --icon-plate: light-dark(#ffffff, #eef3f8);
+    --icon-plate: light-dark(#ffffff, #152a40);
     --icon-plate-border: light-dark(#ffffff59, #ffffff40);
     --icon-plate-shadow: 0 1px 4px light-dark(
       oklch(0 0 0 / 0.08),
