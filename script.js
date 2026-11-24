@@ -82,7 +82,7 @@ const LINKS = [
     label: "メール",
     group: "コミュニティ・連絡先",
     url: "mailto:taiyaki_dos@yahoo.co.jp",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm0 2v.2l8 5 8-5V8H4zm16 8V10.3l-7.5 4.7a1 1 0 0 1-1 0L4 10.3V16h16z"/></svg>`,
     color: "var(--color-mail)",
   },
 ];
