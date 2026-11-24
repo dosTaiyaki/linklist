@@ -124,9 +124,9 @@
     padding: 38px 16px 24px;
     line-height: 1.65;
     background:
-      radial-gradient(900px 520px at 12% -120px, color-mix(in oklch, var(--season-accent) 58%, transparent), transparent 72%),
-      radial-gradient(820px 520px at 90% 10%, color-mix(in oklch, var(--season-accent-2) 50%, transparent), transparent 72%),
-      radial-gradient(760px 620px at 50% 108%, color-mix(in oklch, var(--season-accent) 36%, transparent), transparent 70%),
+      radial-gradient(900px 520px at 12% -120px, color-mix(in oklch, var(--season-accent) 30%, transparent), transparent 72%),
+      radial-gradient(820px 520px at 90% 10%, color-mix(in oklch, var(--season-accent-2) 26%, transparent), transparent 72%),
+      radial-gradient(760px 620px at 50% 108%, color-mix(in oklch, var(--season-accent) 18%, transparent), transparent 70%),
       radial-gradient(1000px 500px at 50% -180px, var(--bg-accent), transparent 70%),
       linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--bg) 82%, white 18%));
     background-attachment: fixed;
@@ -142,7 +142,7 @@
       content: "";
       position: fixed;
       border-radius: 50%;
-      filter: blur(70px);
+      filter: blur(90px);
       pointer-events: none;
       z-index: -1;
     }
@@ -152,7 +152,7 @@
       height: 420px;
       top: -120px;
       left: -100px;
-      background: color-mix(in oklch, var(--season-accent) 55%, transparent);
+      background: color-mix(in oklch, var(--season-accent) 32%, transparent);
       animation: orb-drift 16s ease-in-out infinite alternate;
     }
 
@@ -161,7 +161,7 @@
       height: 360px;
       bottom: -100px;
       right: -80px;
-      background: color-mix(in oklch, var(--season-accent-2) 50%, transparent);
+      background: color-mix(in oklch, var(--season-accent-2) 28%, transparent);
       animation: orb-drift 20s ease-in-out infinite alternate-reverse;
     }
   }
@@ -240,7 +240,7 @@
       font-size: 1.7rem;
       letter-spacing: -0.02em;
       text-wrap: balance;
-      background: linear-gradient(92deg, var(--season-accent), var(--season-accent-2));
+      background: linear-gradient(92deg, color-mix(in oklch, var(--season-accent) 78%, var(--text-primary)), color-mix(in oklch, var(--season-accent-2) 78%, var(--text-primary)));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
