@@ -197,6 +197,30 @@
     gap: 12px;
   }
 
+  /* --- Group heading --- */
+  .links__heading {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--text-secondary);
+    margin: 14px 4px 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+  }
+
+  .links__list > li:first-child .links__heading {
+    margin-top: 0;
+  }
+
   /* --- Link card --- */
   .link-card {
     display: flex;
