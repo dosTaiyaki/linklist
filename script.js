@@ -1,49 +1,5 @@
 // リンク一覧は index.html に直接記述しています（JavaScriptが無効でも表示されます）。
-// このスクリプトは補助機能のみを担当します：メールアドレスのコピー、GA4計測、季節の切り替え、年表示。
-
-function showToast(message) {
-  let toast = document.getElementById("toast");
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "toast";
-    toast.className = "toast";
-    toast.setAttribute("role", "status");
-    document.body.appendChild(toast);
-  }
-  toast.textContent = message;
-  toast.classList.add("toast--show");
-  clearTimeout(showToast._timer);
-  showToast._timer = setTimeout(() => toast.classList.remove("toast--show"), 2000);
-}
-
-/** メールアドレスのコピーボタンに動作を付けます。 */
-function setupMailCopy() {
-  const copyBtn = document.querySelector(".link-card__copy");
-  if (!copyBtn) return;
-  copyBtn.addEventListener("click", async () => {
-    const address = copyBtn.dataset.address || "";
-    let copied = false;
-    try {
-      await navigator.clipboard.writeText(address);
-      copied = true;
-    } catch {
-      const ta = document.createElement("textarea");
-      ta.value = address;
-      document.body.appendChild(ta);
-      ta.select();
-      try { copied = document.execCommand("copy"); } catch { copied = false; }
-      ta.remove();
-    }
-    if (copied) {
-      showToast("メールアドレスをコピーしました");
-      if (typeof gtag === "function") {
-        gtag("event", "mail_copy", { link_label: "メール" });
-      }
-    } else {
-      showToast(`コピーできませんでした（${address}）`);
-    }
-  });
-}
+// このスクリプトは補助機能のみを担当します：GA4計測、季節の切り替え、年表示。
 
 /**
  * 日付判定に使う「今日」の月日を返します。
@@ -96,8 +52,6 @@ function applyBirthdayTheme() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupMailCopy();
-
   const linksNav = document.getElementById("links");
   if (linksNav) {
     linksNav.addEventListener("click", (e) => {
@@ -106,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gtag("event", "link_click", {
         link_label: card.dataset.label || "",
         link_group: card.dataset.group || "",
-        link_url: card.href,
+        link_url: card.protocol === "mailto:" ? "mailto:" : card.href,
       });
     });
   }
