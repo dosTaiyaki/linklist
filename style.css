@@ -37,7 +37,7 @@
     --color-note: light-dark(#111111, #ffffff);
     --color-discord: #5865f2;
     --color-github: light-dark(#181717, #ffffff);
---color-mail: #f08a3e;
+    --color-mail: #f08a3e;
 
     /* Layout */
     --max-width: 520px;
@@ -76,8 +76,35 @@
     /* Typography */
     --font-sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
     --font-display: "Sora", var(--font-sans);
+
+    /* Seasonal accent — switched by [data-season] on <html> (script.js) */
+    --season-accent: oklch(0.62 0.10 235);
+    --season-accent-2: oklch(0.72 0.08 200);
   }
 }
+
+
+  /* Season palettes */
+  :root[data-season="spring"] {
+    --season-accent: oklch(0.74 0.11 8);
+    --season-accent-2: oklch(0.82 0.07 350);
+    --bg-accent: light-dark(#f6dde4, #33222b);
+  }
+  :root[data-season="summer"] {
+    --season-accent: oklch(0.70 0.13 205);
+    --season-accent-2: oklch(0.80 0.10 165);
+    --bg-accent: light-dark(#cfeef2, #17303a);
+  }
+  :root[data-season="autumn"] {
+    --season-accent: oklch(0.68 0.12 55);
+    --season-accent-2: oklch(0.74 0.10 30);
+    --bg-accent: light-dark(#f2e2cc, #33291c);
+  }
+  :root[data-season="christmas"] {
+    --season-accent: oklch(0.62 0.16 25);
+    --season-accent-2: oklch(0.66 0.12 150);
+    --bg-accent: light-dark(#f3ddd8, #33231f);
+  }
 
 /* ── Base ──────────────────────────────────────── */
 @layer base {
@@ -97,8 +124,11 @@
     padding: 38px 16px 24px;
     line-height: 1.65;
     background:
+      radial-gradient(900px 480px at 15% -120px, color-mix(in oklch, var(--season-accent) 32%, transparent), transparent 70%),
+      radial-gradient(800px 460px at 88% 12%, color-mix(in oklch, var(--season-accent-2) 26%, transparent), transparent 70%),
       radial-gradient(1000px 500px at 50% -180px, var(--bg-accent), transparent 70%),
       linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--bg) 88%, white 12%));
+    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
 
     @media (min-width: 600px) {
@@ -151,7 +181,7 @@
       height: 96px;
       border-radius: var(--radius-avatar);
       object-fit: cover;
-      border: 3px solid color-mix(in oklch, var(--border) 80%, white 20%);
+      border: 3px solid color-mix(in oklch, var(--season-accent) 55%, white 45%);
       box-shadow: 0 8px 22px oklch(0.2 0.04 240 / 0.22);
 
       /* @starting-style replaces @keyframes avatar-pop */
@@ -197,6 +227,30 @@
     gap: 12px;
   }
 
+  /* --- Group heading --- */
+  .links__heading {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--text-secondary);
+    margin: 14px 4px 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+  }
+
+  .links__list > li:first-child .links__heading {
+    margin-top: 0;
+  }
+
   /* --- Link card --- */
   .link-card {
     display: flex;
@@ -206,7 +260,7 @@
     border-radius: var(--radius-card);
     border: 1px solid var(--border);
     background: var(--surface);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(14px) saturate(1.5);
     color: var(--text-primary);
     text-decoration: none;
     position: relative;
@@ -242,7 +296,9 @@
     &:focus-visible {
       transform: translateY(-3px) scale(1.01);
       background-color: var(--surface-hover);
-      box-shadow: var(--shadow-hover);
+      box-shadow:
+        var(--shadow-hover),
+        0 10px 36px -8px color-mix(in oklch, var(--accent, oklch(0.6 0 0)) 45%, transparent);
     }
 
     &:hover::before,
