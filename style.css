@@ -392,3 +392,66 @@
     }
   }
 }
+
+/* ── Mail copy button & toast ─────────────────── */
+@layer components {
+  .links__item--mail {
+    position: relative;
+  }
+
+  .link-card__copy {
+    position: absolute;
+    top: 50%;
+    right: 48px;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .link-card__copy svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    display: block;
+  }
+
+  .link-card__copy:hover {
+    color: var(--text-primary);
+  }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 16px);
+    z-index: 50;
+    max-width: calc(100vw - 32px);
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--text-primary);
+    color: var(--bg);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .toast--show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

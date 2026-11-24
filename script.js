@@ -87,6 +87,21 @@ const LINKS = [
   },
 ];
 
+function showToast(message) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    toast.setAttribute("role", "status");
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("toast--show");
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => toast.classList.remove("toast--show"), 2000);
+}
+
 function buildLinks() {
   const container = document.getElementById("links");
   if (!container) return;
@@ -122,6 +137,8 @@ function buildLinks() {
     card.style.setProperty("--accent", link.color);
     card.style.setProperty("--i", index);
     card.setAttribute("aria-label", isExternal ? `${link.label}を新しいタブで開く` : link.label);
+    card.dataset.label = link.label;
+    card.dataset.group = link.group || "";
 
     const icon = document.createElement("span");
     icon.className = "link-card__icon";
@@ -138,6 +155,36 @@ function buildLinks() {
 
     card.append(icon, label, arrow);
     li.appendChild(card);
+
+    if (link.url.startsWith("mailto:")) {
+      li.classList.add("links__item--mail");
+      const copyBtn = document.createElement("button");
+      copyBtn.type = "button";
+      copyBtn.className = "link-card__copy";
+      copyBtn.setAttribute("aria-label", "メールアドレスをコピー");
+      copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>';
+      copyBtn.addEventListener("click", async () => {
+        const address = link.url.slice("mailto:".length);
+        let copied = false;
+        try {
+          await navigator.clipboard.writeText(address);
+          copied = true;
+        } catch {
+          const ta = document.createElement("textarea");
+          ta.value = address;
+          document.body.appendChild(ta);
+          ta.select();
+          try { copied = document.execCommand("copy"); } catch { copied = false; }
+          ta.remove();
+        }
+        showToast(copied ? "メールアドレスをコピーしました" : address);
+        if (typeof gtag === "function") {
+          gtag("event", "mail_copy", { link_label: link.label });
+        }
+      });
+      li.appendChild(copyBtn);
+    }
+
     ul.appendChild(li);
   });
 
@@ -175,6 +222,19 @@ function applyBirthdayTheme() {
 
 document.addEventListener("DOMContentLoaded", () => {
   buildLinks();
+
+  const linksNav = document.getElementById("links");
+  if (linksNav) {
+    linksNav.addEventListener("click", (e) => {
+      const card = e.target.closest("a.link-card");
+      if (!card || typeof gtag !== "function") return;
+      gtag("event", "link_click", {
+        link_label: card.dataset.label || "",
+        link_group: card.dataset.group || "",
+        link_url: card.href,
+      });
+    });
+  }
   applyBirthdayTheme();
   applySeasonalAvatar();
 
